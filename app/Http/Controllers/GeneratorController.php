@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\Generator\GenerateContentService;
+use OpenAI;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 
@@ -13,8 +15,8 @@ class GeneratorController extends Controller
             'content' => $request->content ?? ''
         ]);
     }
-    public function generateContent(Request $request)
+    public function generateContent(Request $request,GenerateContentService $content)
     {
-        dd($request->all());
+        $content->execute($request->content);
     }
 }
