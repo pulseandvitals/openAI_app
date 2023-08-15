@@ -20,6 +20,7 @@ class GenerateContentService {
             'prompt' => $content,
         ]);
         $content = trim($result['choices'][0]['text']);
+
         dd($content);
     }
 }

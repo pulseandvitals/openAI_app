@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DocumentController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -47,9 +48,16 @@ Route::middleware('auth')->prefix('website')->name('website.')->group(function()
     Route::patch('/update/{website}',[WebsiteController::class,'update'])->name('update');
 });
 
-Route::middleware('auth')->prefix('generator')->name('generator.')->group(function() {
+Route::middleware('auth')->prefix('generator')->name('generator.')->group(function () {
     Route::get('/', [GeneratorController::class,'index'])->name('index');
     Route::post('/generate-content',[GeneratorController::class,'generateContent'])->name('generate-content');
 });
 
+Route::middleware('auth')->prefix('document')->name('document.')->group(function () {
+    Route::get('/',[DocumentController::class,'index'])->name('index');
+    Route::get('/create',[DocumentController::class,'create'])->name('create');
+    Route::post('/store',[DocumentController::class,'store'])->name('store');
+    Route::delete('/{document}',[DocumentController::class,'destroy'])->name('destroy');
+    Route::get('/show/{document}',[DocumentController::class,'show'])->name('show');
+});
 require __DIR__.'/auth.php';

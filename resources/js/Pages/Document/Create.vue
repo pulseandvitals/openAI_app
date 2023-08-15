@@ -1,25 +1,21 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import InputError from "@/Components/InputError.vue";
-import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 
-let props = defineProps({
-    content: Object,
-});
 const form = useForm({
-    content: props.content,
+    url: "",
 });
 </script>
 
 <template>
-    <Head title="Generator" />
+    <Head title="Create" />
 
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Generator
+                Create
             </h2>
         </template>
         <div class="py-12">
@@ -27,7 +23,7 @@ const form = useForm({
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="px-6 py-4 border-b flex items-center gap-6">
                         <Link
-                            :href="route('website.index')"
+                            :href="route('document.index')"
                             class="px-4 py-2 rounded-lg font-bold flex items-center gap-4"
                         >
                             <svg
@@ -49,37 +45,36 @@ const form = useForm({
                         </Link>
                     </div>
                     <div class="p-6 w-full">
-                        <h3 class="text-xl font-bold">
-                            Generate message with the help of AI.
-                        </h3>
+                        <h3 class="text-xl font-bold">Upload CSV/Excel File</h3>
                         <form
-                            @submit.prevent="
-                                form.post(route('generator.generate-content'))
-                            "
+                            @submit.prevent="form.post(route('document.store'))"
                             class="mt-6 space-y-6"
+                            enctype="multipart/form-data"
                         >
                             <div>
-                                <InputLabel
-                                    for="content"
-                                    value="Ask AI here.."
+                                <input
+                                    class="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:placeholder-gray-400"
+                                    id="large_size"
+                                    type="file"
+                                    @input="form.url = $event.target.files[0]"
                                 />
-
-                                <textarea
-                                    type="text"
-                                    rows="3"
-                                    class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                                    v-model="form.content"
-                                />
+                                <progress
+                                    v-if="form.progress"
+                                    :value="form.progress.percentage"
+                                    max="100"
+                                >
+                                    {{ form.progress.percentage }}%
+                                </progress>
 
                                 <InputError
                                     class="mt-2"
-                                    :message="form.errors.content"
+                                    :message="form.errors.url"
                                 />
                             </div>
 
                             <div class="flex items-center gap-4">
                                 <PrimaryButton :disabled="form.processing"
-                                    >Generate</PrimaryButton
+                                    >Upload</PrimaryButton
                                 >
                             </div>
                         </form>
