@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('label');
             $table->string('file_url');
             $table->string('new_url');
             $table->string('original_name');

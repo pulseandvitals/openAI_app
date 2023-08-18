@@ -21,7 +21,7 @@ const form = useForm({
             </h2>
         </template>
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="px-6 py-4 border-b flex items-center gap-6">
                         <Link
@@ -53,8 +53,6 @@ const form = useForm({
                             class="mt-6 space-y-6"
                         >
                             <div>
-                                <InputLabel for="url" value="Url" />
-
                                 <TextInput
                                     id="type"
                                     type="text"

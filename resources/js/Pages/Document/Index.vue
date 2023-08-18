@@ -28,7 +28,7 @@ const destroy = (document) => {
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="overflow-hidden">
-                    <div class="bg-white overflow-hidden mb-3">
+                    <div class="bg-white overflow-hidden mb-3 sm:rounded-lg">
                         <div class="px-6 py-4 border-b flex justify-end">
                             <Link
                                 :href="route('document.create')"
@@ -51,63 +51,48 @@ const destroy = (document) => {
                         </div>
                     </div>
 
-                    <div class="p-4 bg-white">
-                        <Table>
-                            <template #thead>
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">File</th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Created By
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Created
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-end">
-                                        &nbsp;
-                                    </th>
-                                </tr>
-                            </template>
-                            <template #tbody>
-                                <tr
-                                    class="bg-white border-b"
-                                    v-for="document in documents.data"
-                                    :key="document.id"
+                    <div
+                        class="py-1"
+                        v-for="document in documents.data"
+                        :key="document.id"
+                    >
+                        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                            <div
+                                class="bg-white overflow-hidden shadow-sm sm:rounded-lg"
+                            >
+                                <div
+                                    class="px-6 py-4 border-b flex justify-between items-center"
                                 >
-                                    <td
-                                        scope="row"
-                                        class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap"
-                                    >
-                                        {{ document.orig_name }}
-                                    </td>
-                                    <td
-                                        scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-                                    >
+                                    <div class="text-gray-900">
+                                        {{ document.label }}
+                                        <div class="text-xs text-gray-400">
+                                            {{ document.orig_name }}
+                                        </div>
+                                    </div>
+
+                                    <div class="font-xs text-gray-400">
                                         {{ document.created_by.name }}
-                                    </td>
-                                    <td
-                                        scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-                                    >
+                                    </div>
+                                    <div class="text-xs text-gray-400">
                                         {{ document.created }}
-                                    </td>
-                                    <td class="px-6 py-4 text-end">
+                                    </div>
+
+                                    <div class="text-gray-900 text-sm">
                                         <Link
                                             :href="document.routes.show"
                                             class="font-medium text-gray-300 mr-2"
                                             >View</Link
                                         >
-
                                         <button
                                             @click="destroy(document)"
                                             class="font-xs text-gray-300 mr-2"
                                         >
                                             Remove
                                         </button>
-                                    </td>
-                                </tr>
-                            </template>
-                        </Table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

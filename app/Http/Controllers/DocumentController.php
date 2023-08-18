@@ -2,21 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Document\DocumentRequest;
 use Inertia\Inertia;
 use App\Models\Document;
+use App\Models\ImportData;
+use App\Imports\DataImport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Resources\DocumentResource;
+use App\Http\Requests\Document\DocumentRequest;
 use App\Services\Document\StoreDocumentService;
+use App\Services\Document\GenerateDocumentService;
 
 class DocumentController extends Controller
 {
 
     public function index()
     {
+
         return Inertia::render('Document/Index', [
             'documents' => DocumentResource::collection(Document::query()
                 ->with('user')
+                ->where('user_id', auth()->id())
                 ->orderBy('created_at','DESC')
                 ->get()
                 )
@@ -30,27 +36,23 @@ class DocumentController extends Controller
 
     public function store(DocumentRequest $request, StoreDocumentService $document)
     {
-        $document->execute($request->url,auth()->id());
+        $doc = $document->execute($request->validated(),auth()->id());
+        if(!empty($doc)) {
+            $document_id = $doc->id;
+            $user = auth()->id();
+            Excel::import(new DataImport($document_id,$user), public_path('documents/'.$doc->user_id.'/'.$doc->file_url));
+        }
 
         return redirect()->route('document.index')->with('message','Success');
     }
 
-    public function show(Document $document)
+    public function show(Document $document, GenerateDocumentService $generateDocumentService)
     {
-        $filePath = public_path('documents/'.$document->user_id.'/'.$document->file_url);
-            $file = fopen($filePath, 'r');
-            $header = fgetcsv($file);
-
-            $data = [];
-            while ($row = fgetcsv($file)) {
-                $data[] = array_combine($header, $row);
-            }
-
-        fclose($file);
-
+        $data = $generateDocumentService->execute($document);
+        dd($data);
         return Inertia::render('Document/Show', [
             'documents' => $data,
-            'file_name' => $document->original_name
+            'file_name' => $document->label
         ]);
     }
 

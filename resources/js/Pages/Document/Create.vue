@@ -2,9 +2,11 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import TextInput from "@/Components/TextInput.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 
 const form = useForm({
+    label: "",
     url: "",
 });
 </script>
@@ -19,7 +21,7 @@ const form = useForm({
             </h2>
         </template>
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto sm:px-6 lg:px-6">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="px-6 py-4 border-b flex items-center gap-6">
                         <Link
@@ -52,6 +54,20 @@ const form = useForm({
                             enctype="multipart/form-data"
                         >
                             <div>
+                                <TextInput
+                                    id="type"
+                                    type="text"
+                                    class="mt-1 block w-full"
+                                    placeholder="Title"
+                                    v-model="form.label"
+                                />
+
+                                <InputError
+                                    class="mt-2"
+                                    :message="form.errors.label"
+                                />
+                            </div>
+                            <div>
                                 <input
                                     class="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:placeholder-gray-400"
                                     id="large_size"
@@ -74,7 +90,7 @@ const form = useForm({
 
                             <div class="flex items-center gap-4">
                                 <PrimaryButton :disabled="form.processing"
-                                    >Upload</PrimaryButton
+                                    >Import</PrimaryButton
                                 >
                             </div>
                         </form>

@@ -26,6 +26,7 @@ class DocumentRequest extends FormRequest
         switch($this->method()) {
             case 'POST':
                 return [
+                    'label' => ['required','string','max:50'],
                     'url' => ['required','file','mimes:csv,txt,xls,xlsx']
                 ];
         }

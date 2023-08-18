@@ -2,6 +2,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import Table from "@/Components/Table.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
+import TextInput from "@/Components/TextInput.vue";
 
 defineProps({
     websites: Array,

@@ -11,6 +11,7 @@ class DocumentResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'label' => $this->label,
             'file_url' => $this->file_url,
             'orig_name' => $this->original_name,
             'created_by' => UserResource::make($this->whenLoaded('user')),
