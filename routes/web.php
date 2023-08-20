@@ -59,5 +59,6 @@ Route::middleware('auth')->prefix('document')->name('document.')->group(function
     Route::post('/store',[DocumentController::class,'store'])->name('store');
     Route::delete('/{document}',[DocumentController::class,'destroy'])->name('destroy');
     Route::get('/show/{document}',[DocumentController::class,'show'])->name('show');
+    Route::delete('/{document}', [DocumentController::class,'destroy'])->name('destroy');
 });
 require __DIR__.'/auth.php';

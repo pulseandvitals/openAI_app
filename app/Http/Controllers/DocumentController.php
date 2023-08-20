@@ -26,7 +26,7 @@ class DocumentController extends Controller
                 ->with('user')
                 ->where('user_id', auth()->id())
                 ->orderBy('created_at','DESC')
-                ->get()
+                ->paginate(10)
                 )
         ]);
     }
@@ -45,7 +45,7 @@ class DocumentController extends Controller
             Excel::import(new DataImport($document_id,$user), public_path('documents/'.$doc->user_id.'/'.$doc->file_url));
         }
 
-        return redirect()->route('document.index')->with('message','Success');
+        return redirect()->route('document.index')->with('message','Successfully imported '.$doc->original_name);
     }
 
     public function show(Document $document, GenerateDocumentService $generateDocumentService)
@@ -69,6 +69,9 @@ class DocumentController extends Controller
 
     public function destroy(Document $document)
     {
-        //
+        $document->delete();
+
+        return redirect()->route('document.index')
+            ->with('message','Successfully deleted file named '.$document->original_name);
     }
 }

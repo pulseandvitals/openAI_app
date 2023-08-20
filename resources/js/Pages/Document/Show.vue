@@ -9,7 +9,7 @@ defineProps({
 </script>
 
 <template>
-    <Head title="Document" />
+    <Head :title="file_name" />
 
     <AuthenticatedLayout>
         <template #header>
@@ -44,19 +44,27 @@ defineProps({
                     </div>
 
                     <div class="grid grid-cols-4 gap-4">
-                        <div class="p-4 bg-white">
-                            <div>Main Topic</div>
+                        <div class="p-4 bg-blue-200">
+                            <div class="text-center">
+                                Main Topic (Pillar Silos)
+                            </div>
                         </div>
-                        <div class="p-4 bg-white">
-                            <div>Sub Topic 2</div>
+                        <div class="p-4 bg-blue-200">
+                            <div class="text-center">
+                                Sub Topic 2 (Pillar Hubs)
+                            </div>
                         </div>
-                        <div class="p-4 bg-white">
-                            <div>Sub Topic 3</div>
+                        <div class="p-4 bg-blue-200">
+                            <div class="text-center">
+                                Sub Topic 3 (Clusters)
+                            </div>
                         </div>
-                        <div class="p-4 bg-white">
-                            <div>Sub Topic 4</div>
+                        <div class="p-4 bg-blue-200">
+                            <div class="text-center">
+                                Sub Topic 4 (Individual Page)
+                            </div>
                         </div>
-                        <div class="p-4 bg-white">
+                        <div class="p-4 bg-white self-start">
                             <div
                                 class="font-bold"
                                 v-for="e in datas.main_topic_1"
@@ -65,7 +73,7 @@ defineProps({
                                 <span> [ {{ e.main_topic_1 }} ] </span>
                             </div>
                         </div>
-                        <div class="p-4 bg-white">
+                        <div class="p-4 bg-white self-start">
                             <div
                                 class="font-bold"
                                 v-for="e in datas.sub_topic_2"
@@ -74,7 +82,7 @@ defineProps({
                                 <span> [ {{ e.sub_topic_2 }} ] </span>
                             </div>
                         </div>
-                        <div class="p-4 bg-white">
+                        <div class="p-4 bg-white self-start">
                             <div
                                 class="font-bold"
                                 v-for="e in datas.sub_topic_3"
@@ -83,7 +91,7 @@ defineProps({
                                 <span> [ {{ e.sub_topic_3 }} ] </span>
                             </div>
                         </div>
-                        <div class="p-4 bg-white">
+                        <div class="p-4 bg-white self-start">
                             <div
                                 class="font-bold"
                                 v-for="e in datas.sub_topic_4"

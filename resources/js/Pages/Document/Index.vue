@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import Table from "@/Components/Table.vue";
+import Success from "@/Components/Alert/Success.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 
 defineProps({
@@ -25,7 +25,10 @@ const destroy = (document) => {
                 Document
             </h2>
         </template>
-        <div class="py-12">
+
+        <Success />
+
+        <div class="py-6">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="overflow-hidden">
                     <div class="bg-white overflow-hidden mb-3 sm:rounded-lg">
