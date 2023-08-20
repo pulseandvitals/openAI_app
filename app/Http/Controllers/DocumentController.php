@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Resources\DocumentResource;
 use App\Http\Requests\Document\DocumentRequest;
+use App\Http\Resources\ImportDataResource;
+use App\Http\Resources\UserResource;
 use App\Services\Document\StoreDocumentService;
 use App\Services\Document\GenerateDocumentService;
 
@@ -49,9 +51,8 @@ class DocumentController extends Controller
     public function show(Document $document, GenerateDocumentService $generateDocumentService)
     {
         $data = $generateDocumentService->execute($document);
-        dd($data);
         return Inertia::render('Document/Show', [
-            'documents' => $data,
+            'datas' => $data,
             'file_name' => $document->label
         ]);
     }

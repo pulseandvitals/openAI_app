@@ -1,10 +1,9 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import Table from "@/Components/Table.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 
 defineProps({
-    documents: Array,
+    datas: Array,
     file_name: String,
 });
 </script>
@@ -44,66 +43,55 @@ defineProps({
                         </div>
                     </div>
 
-                    <div class="p-4 bg-white">
-                        <Table>
-                            <template #thead>
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">
-                                        Sample
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Sample
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Sample
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Sample
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Sample
-                                    </th>
-                                </tr>
-                            </template>
-                            <template #tbody>
-                                <tr
-                                    class="bg-white border-b"
-                                    v-for="document in documents"
-                                    :key="document.id"
-                                >
-                                    <td
-                                        scope="row"
-                                        class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap"
-                                    >
-                                        {{ document.quarter }}
-                                    </td>
-                                    <td
-                                        scope="row"
-                                        class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap"
-                                    >
-                                        {{ document.ser_ref }}
-                                    </td>
-                                    <td
-                                        scope="row"
-                                        class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap"
-                                    >
-                                        {{ document.industry_code }}
-                                    </td>
-                                    <td
-                                        scope="row"
-                                        class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap"
-                                    >
-                                        {{ document.industry_name }}
-                                    </td>
-                                    <td
-                                        scope="row"
-                                        class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap"
-                                    >
-                                        {{ document.filled_jobs }}
-                                    </td>
-                                </tr>
-                            </template>
-                        </Table>
+                    <div class="grid grid-cols-4 gap-4">
+                        <div class="p-4 bg-white">
+                            <div>Main Topic</div>
+                        </div>
+                        <div class="p-4 bg-white">
+                            <div>Sub Topic 2</div>
+                        </div>
+                        <div class="p-4 bg-white">
+                            <div>Sub Topic 3</div>
+                        </div>
+                        <div class="p-4 bg-white">
+                            <div>Sub Topic 4</div>
+                        </div>
+                        <div class="p-4 bg-white">
+                            <div
+                                class="font-bold"
+                                v-for="e in datas.main_topic_1"
+                                :key="e.id"
+                            >
+                                <span> [ {{ e.main_topic_1 }} ] </span>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-white">
+                            <div
+                                class="font-bold"
+                                v-for="e in datas.sub_topic_2"
+                                :key="e.id"
+                            >
+                                <span> [ {{ e.sub_topic_2 }} ] </span>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-white">
+                            <div
+                                class="font-bold"
+                                v-for="e in datas.sub_topic_3"
+                                :key="e.id"
+                            >
+                                <span> [ {{ e.sub_topic_3 }} ] </span>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-white">
+                            <div
+                                class="font-bold"
+                                v-for="e in datas.sub_topic_4"
+                                :key="e.id"
+                            >
+                                <span> [ {{ e.sub_topic_4 }} ] </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
