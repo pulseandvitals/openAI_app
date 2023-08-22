@@ -1,6 +1,6 @@
 <template>
     <div
-        class="bg-teal-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md max-w-7xl mx-auto sm:px-6 mt-2"
+        class="bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md max-w-7xl mx-auto sm:px-6 mt-2"
         role="alert"
         v-if="$page.props.flash.message"
     >
@@ -22,7 +22,7 @@
                 </svg>
             </div>
             <div>
-                <p class="font-bold">Prompt</p>
+                <p class="font-bold">Success</p>
                 <p class="text-sm">
                     {{ $page.props.flash.message }}
                 </p>

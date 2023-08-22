@@ -20,7 +20,6 @@ class DocumentController extends Controller
 
     public function index()
     {
-
         return Inertia::render('Document/Index', [
             'documents' => DocumentResource::collection(Document::query()
                 ->with('user')
@@ -48,9 +47,10 @@ class DocumentController extends Controller
         return redirect()->route('document.index')->with('message','Successfully imported '.$doc->original_name);
     }
 
-    public function show(Document $document, GenerateDocumentService $generateDocumentService)
+    public function show($parent,$child,Document $document,GenerateDocumentService $generateDocumentService)
     {
-        $data = $generateDocumentService->execute($document);
+        $data = $generateDocumentService->execute($document,$parent,$child);
+
         return Inertia::render('Document/Show', [
             'datas' => $data,
             'file_name' => $document->label

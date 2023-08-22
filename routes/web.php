@@ -58,7 +58,6 @@ Route::middleware('auth')->prefix('document')->name('document.')->group(function
     Route::get('/create',[DocumentController::class,'create'])->name('create');
     Route::post('/store',[DocumentController::class,'store'])->name('store');
     Route::delete('/{document}',[DocumentController::class,'destroy'])->name('destroy');
-    Route::get('/show/{document}',[DocumentController::class,'show'])->name('show');
-    Route::delete('/{document}', [DocumentController::class,'destroy'])->name('destroy');
+    Route::get('/show/{parent}/{child}/{document}',[DocumentController::class,'show'])->name('show');
 });
 require __DIR__.'/auth.php';

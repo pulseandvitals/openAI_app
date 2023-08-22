@@ -18,7 +18,11 @@ class DocumentResource extends JsonResource
             'created' => !empty($this->created_at) ? $this->created_at->format('M, d Y H:i:s A') : null,
             'routes' => [
                 'destroy' => route('document.destroy', $this),
-                'show' => route('document.show',$this)
+                'show' => route('document.show',[
+                    'parent' => 'main_top_1',
+                    'child' => 'null',
+                    'document' => $this,
+                ])
             ]
         ];
     }

@@ -38,6 +38,6 @@ class ImportData extends Model
 
     public function document()
     {
-        return $this->belongsTo(Document::class,'document_id');
+        return $this->belongsTo(Document::class,'id','document_id');
     }
 }

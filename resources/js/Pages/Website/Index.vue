@@ -35,7 +35,7 @@ const destroy = (website) => {
                         <div class="px-6 py-4 border-b flex justify-end">
                             <Link
                                 :href="route('website.create')"
-                                class="px-4 py-2 text-black border border-none font-bold"
+                                class="px-4 py-2 border border-none rounded-lg font-bold hover:shadow-lg"
                                 ><svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
