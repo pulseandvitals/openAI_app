@@ -1,6 +1,6 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import { Head } from "@inertiajs/vue3";
 </script>
 
 <template>
@@ -8,13 +8,23 @@ import { Head } from '@inertiajs/vue3';
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                Dashboard
+            </h2>
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">You're logged in!</div>
+            <div
+                class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid grid-cols-3 gap-5"
+            >
+                <div class="bg-white overflow-hidden shadow-sm rounded-none">
+                    <div class="p-6 text-gray-900 text-lg">Document Posted</div>
+                </div>
+                <div class="bg-white overflow-hidden shadow-sm rounded-none">
+                    <div class="p-6 text-gray-900 text-lg">Completed</div>
+                </div>
+                <div class="bg-white overflow-hidden shadow-sm rounded-none">
+                    <div class="p-6 text-gray-900 text-lg">Pending</div>
                 </div>
             </div>
         </div>

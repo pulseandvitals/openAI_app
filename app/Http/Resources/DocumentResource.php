@@ -15,7 +15,10 @@ class DocumentResource extends JsonResource
             'file_url' => $this->file_url,
             'orig_name' => $this->original_name,
             'created_by' => UserResource::make($this->whenLoaded('user')),
-            'created' => !empty($this->created_at) ? $this->created_at->format('M, d Y H:i:s A') : null,
+            'created' => !empty($this->created_at)
+                ? $this->created_at->diffForHumans()
+                : null,
+
             'routes' => [
                 'destroy' => route('document.destroy', $this),
                 'show' => route('document.show',[

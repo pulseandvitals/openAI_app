@@ -32,16 +32,16 @@ class GenerateDocumentService {
             ->whereNotNull(['sub_topic_2'])
             ->get();
 
-            $sub_topic_3 = ImportData::query()
-                ->select('sub_topic_3','document_id','sub_topic_2')
-                ->where('sub_topic_3','!=',$parent != $child ? $parent : $child)
-                ->where([
-                    'document_id' => $params['id'],
-                    'sub_topic_2' => $parent != $child ? $parent : $child,
-                ])
-                ->distinct()
-                ->whereNotNull(['sub_topic_3'])
-                ->get();
+        $sub_topic_3 = ImportData::query()
+            ->select('sub_topic_3','document_id','sub_topic_2')
+            ->where('sub_topic_3','!=',$parent != $child ? $parent : $child)
+            ->where([
+                'document_id' => $params['id'],
+                'sub_topic_2' => $parent != $child ? $parent : $child,
+            ])
+            ->distinct()
+            ->whereNotNull(['sub_topic_3'])
+            ->get();
 
         $sub_topic_4 = ImportData::query()
             ->select('sub_topic_4','document_id','sub_topic_3')
@@ -55,14 +55,21 @@ class GenerateDocumentService {
             ->get();
 
 
-
         $data = [
             'main_topic_1' => $main_topic_1,
-            'sub_topic_2' =>  $sub_topic_2 ?? null,
-            'sub_topic_3' =>  $sub_topic_3 ?? null,
-            'sub_topic_4' =>  $sub_topic_4 ?? null,
+            'sub_topic_2' =>  [
+                'data' => $sub_topic_2 ?? null,
+                'value' => $parent != $child ? $parent : $child
+            ],
+            'sub_topic_3' =>  [
+                'data' => $sub_topic_3 ?? null,
+                'value' => $child
+            ],
+            'sub_topic_4' => [
+                'data' => $sub_topic_4 ?? null,
+                'value' => $parent != $child ? $parent : $child
+            ],
         ];
-
         return $data;
     }
 }

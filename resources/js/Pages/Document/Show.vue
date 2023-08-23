@@ -75,7 +75,11 @@ defineProps({
                                 v-for="e in datas.main_topic_1"
                                 :key="e.id"
                             >
-                                <span>
+                                <span
+                                    :class="[
+                                        e.main_topic_1 ? 'text-green-500' : '',
+                                    ]"
+                                >
                                     {{ e.main_topic_1 }}
                                 </span>
                                 <Link
@@ -109,10 +113,16 @@ defineProps({
                         <div class="font-bold">
                             <div
                                 class="p-4 bg-white self-start mt-2 flex justify-between"
-                                v-for="e in datas.sub_topic_2"
+                                v-for="e in datas.sub_topic_2.data"
                                 :key="e.id"
                             >
-                                <span>
+                                <span
+                                    :class="[
+                                        datas.sub_topic_2.value == e.sub_topic_2
+                                            ? 'text-green-500'
+                                            : '',
+                                    ]"
+                                >
                                     {{ e.sub_topic_2 }}
                                 </span>
 
@@ -147,10 +157,16 @@ defineProps({
                         <div class="font-bold">
                             <div
                                 class="p-4 bg-white self-start mt-2 flex justify-between"
-                                v-for="e in datas.sub_topic_3"
+                                v-for="e in datas.sub_topic_3.data"
                                 :key="e.id"
                             >
-                                <span>
+                                <span
+                                    :class="[
+                                        datas.sub_topic_3.value == e.sub_topic_3
+                                            ? 'text-green-500'
+                                            : '',
+                                    ]"
+                                >
                                     {{ e.sub_topic_3 }}
                                 </span>
 
@@ -191,7 +207,7 @@ defineProps({
                         <div class="font-bold">
                             <div
                                 class="p-4 bg-white self-start mt-2"
-                                v-for="e in datas.sub_topic_4"
+                                v-for="e in datas.sub_topic_4.data"
                                 :key="e.id"
                             >
                                 <span>
