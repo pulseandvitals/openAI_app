@@ -34,10 +34,10 @@ class GenerateDocumentService {
 
             $sub_topic_3 = ImportData::query()
                 ->select('sub_topic_3','document_id','sub_topic_2')
-                ->where('sub_topic_3','!=',$child)
+                ->where('sub_topic_3','!=',$parent != $child ? $parent : $child)
                 ->where([
                     'document_id' => $params['id'],
-                    'sub_topic_2' => $child,
+                    'sub_topic_2' => $parent != $child ? $parent : $child,
                 ])
                 ->distinct()
                 ->whereNotNull(['sub_topic_3'])

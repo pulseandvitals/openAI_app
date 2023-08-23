@@ -119,7 +119,7 @@ defineProps({
                                 <Link
                                     :href="
                                         route('document.show', {
-                                            parent: e.main_topic_1,
+                                            parent: e.sub_topic_2,
                                             child: e.sub_topic_2,
                                             document: e.document_id,
                                         })
