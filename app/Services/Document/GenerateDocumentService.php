@@ -54,6 +54,13 @@ class GenerateDocumentService {
             ->whereNotNull(['sub_topic_4'])
             ->get();
 
+        $keywords = ImportData::query()
+            ->select('keyword','document_id','id')
+            ->where([
+                'document_id' => $params['id'],
+                'sub_topic_3' => $child
+            ])
+            ->get();
 
         $data = [
             'main_topic_1' => $main_topic_1,
@@ -69,7 +76,11 @@ class GenerateDocumentService {
                 'data' => $sub_topic_4 ?? null,
                 'value' => $parent != $child ? $parent : $child
             ],
+            'keywords' => [
+                'data' => $keywords,
+            ],
         ];
+
         return $data;
     }
 }

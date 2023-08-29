@@ -16,6 +16,7 @@ class ImportData extends Model
     protected $fillable = [
         'user_id',
         'document_id',
+        'is_completed',
         'url',
         'position',
         'status',

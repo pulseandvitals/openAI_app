@@ -28,6 +28,7 @@ class ImportDataResource extends JsonResource
             'search_content' => $this->search_content ?? null,
             'content_type' => $this->content_type ?? null,
             'search_volume' => $this->search_volume ?? null,
+            'is_completed' => $this->is_completed ? 1 : 0,
             'cpc' => $this->cpc ?? null,
         ];
     }

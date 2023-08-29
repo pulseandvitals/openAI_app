@@ -18,6 +18,21 @@ defineProps({
             </h2>
         </template>
         <div class="py-6">
+            <div
+                class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid grid-cols-3 gap-5"
+            >
+                <div class="bg-white overflow-hidden shadow-sm rounded-none">
+                    <div class="p-6 text-gray-900 text-lg">Document Posted</div>
+                </div>
+                <div class="bg-white overflow-hidden shadow-sm rounded-none">
+                    <div class="p-6 text-gray-900 text-lg">Completed</div>
+                </div>
+                <div class="bg-white overflow-hidden shadow-sm rounded-none">
+                    <div class="p-6 text-gray-900 text-lg">Pending</div>
+                </div>
+            </div>
+        </div>
+        <div class="py-6">
             <div class="max-w-12xl mx-auto sm:px-6 lg:px-8">
                 <div class="overflow-hidden">
                     <div class="bg-white overflow-hidden mb-3">
@@ -212,6 +227,25 @@ defineProps({
                             >
                                 <span>
                                     {{ e.sub_topic_4 }}
+                                    <Link
+                                        href=""
+                                        class="text-xs text-gray-300"
+                                        preserve-scroll
+                                    >
+                                        Edit
+                                    </Link>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="font-bold">
+                            <div
+                                class="p-4 bg-white self-start mt-2"
+                                v-for="e in datas.keywords.data"
+                                :key="e.id"
+                            >
+                                <span>
+                                    {{ e.keyword }}
                                     <Link
                                         href=""
                                         class="text-xs text-gray-300"
