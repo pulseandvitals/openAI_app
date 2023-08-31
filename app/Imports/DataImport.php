@@ -2,7 +2,7 @@
 
 namespace App\Imports;
 
-use App\Models\ImportData;
+use App\Models\File;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
@@ -18,7 +18,7 @@ class DataImport implements ToModel,WithHeadingRow
     }
     public function model(array $data)
     {
-        return new ImportData([
+        return new File([
             'user_id' => $this->user,
             'document_id' => $this->document_id,
             'url' => $data['web_url'],

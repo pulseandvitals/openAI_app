@@ -2,7 +2,7 @@
 
 namespace App\Services\Document;
 
-use App\Models\ImportData;
+use App\Models\File;
 
 class GenerateDocumentService {
 
@@ -11,7 +11,7 @@ class GenerateDocumentService {
         $parent = $parent ?? null;
         $child = $child ?? null;
 
-        $main_topic_1 = ImportData::query()
+        $main_topic_1 = File::query()
             ->select('main_topic_1','document_id')
             ->distinct()
             ->whereNotNull(['main_topic_1'])
@@ -21,7 +21,7 @@ class GenerateDocumentService {
             ->get();
 
         $mtVal = $main_topic_1->first();
-        $sub_topic_2 = ImportData::query()
+        $sub_topic_2 = File::query()
             ->select('sub_topic_2','document_id','main_topic_1')
             ->where('sub_topic_2' ,'!=' , $mtVal->main_topic_1)
             ->where([
@@ -32,7 +32,7 @@ class GenerateDocumentService {
             ->whereNotNull(['sub_topic_2'])
             ->get();
 
-        $sub_topic_3 = ImportData::query()
+        $sub_topic_3 = File::query()
             ->select('sub_topic_3','document_id','sub_topic_2')
             ->where('sub_topic_3','!=',$parent != $child ? $parent : $child)
             ->where([
@@ -43,7 +43,7 @@ class GenerateDocumentService {
             ->whereNotNull(['sub_topic_3'])
             ->get();
 
-        $sub_topic_4 = ImportData::query()
+        $sub_topic_4 = File::query()
             ->select('sub_topic_4','document_id','sub_topic_3')
             ->where('sub_topic_4','!=',$child)
             ->where([
@@ -54,8 +54,8 @@ class GenerateDocumentService {
             ->whereNotNull(['sub_topic_4'])
             ->get();
 
-        $keywords = ImportData::query()
-            ->select('keyword','document_id','id')
+        $keywords = File::query()
+            ->select('keyword','document_id','id','is_completed')
             ->where([
                 'document_id' => $params['id'],
                 'sub_topic_3' => $child

@@ -53,7 +53,7 @@ import { Head, Link, useForm } from "@inertiajs/vue3";
                     class="flex items-center p-2 rounded-lg text-gray-500 hover:text-white hover:bg-blue-500 group"
                     :href="route('document.index')"
                     :class="[
-                        route().current('document.index')
+                        route().current('document.*')
                             ? 'bg-blue-500 text-white'
                             : '',
                     ]"
@@ -80,7 +80,7 @@ import { Head, Link, useForm } from "@inertiajs/vue3";
                     class="flex items-center p-2 rounded-lg text-gray-500 hover:text-white hover:bg-blue-500 group"
                     :href="route('generator.index')"
                     :class="[
-                        route().current('generator.index')
+                        route().current('generator.*')
                             ? 'bg-blue-500 text-white'
                             : '',
                     ]"
@@ -103,7 +103,7 @@ import { Head, Link, useForm } from "@inertiajs/vue3";
                     class="flex items-center p-2 rounded-lg text-gray-500 hover:text-white hover:bg-blue-500 group"
                     :href="route('website.index')"
                     :class="[
-                        route().current('website.index')
+                        route().current('website.*')
                             ? 'bg-blue-500 text-white'
                             : '',
                     ]"

@@ -21,6 +21,6 @@ class GenerateContentService {
         ]);
         $content = trim($result['choices'][0]['text']);
 
-        dd($content);
+        return $content;
     }
 }

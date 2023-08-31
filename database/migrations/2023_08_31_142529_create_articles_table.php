@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('documents', function (Blueprint $table) {
+        Schema::create('articles', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('label');
-            $table->string('file_url');
             $table->uuid('user_id')->foreign('id')->on('users')->onDelete('cascade');
+            $table->uuid('document_id')->foreign('id')->on('documents')->onDelete('cascade');
+            $table->uuid('topical_map_id')->foreign('id')->on('files')->onDelete('cascade');
+            $table->text('article')->nullable();
+            $table->text('web_url')->nullable();
+            $table->text('token')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('documents');
+        Schema::dropIfExists('articles');
     }
 };

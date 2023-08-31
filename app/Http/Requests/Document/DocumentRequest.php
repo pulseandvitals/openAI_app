@@ -27,7 +27,7 @@ class DocumentRequest extends FormRequest
             case 'POST':
                 return [
                     'label' => ['required','string','max:50'],
-                    'url' => ['required','file','mimes:csv,txt,xls,xlsx']
+                    'url' => ['required','file','mimes:csv,xls,xlsx']
                 ];
         }
     }
