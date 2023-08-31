@@ -1,20 +1,16 @@
 <script setup>
 import Nav from "@/Components/Partials/Nav.vue";
+import Side from "@/Components/Partials/Side.vue";
 </script>
 
 <template>
     <div>
-        <div class="min-h-screen bg-gray-100">
-            <Nav />
-            <!-- Page Heading -->
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <slot name="header" />
-                </div>
-            </header>
+        <Nav />
 
+        <div class="min-h-screen bg-gray-100">
+            <Side />
             <!-- Page Content -->
-            <main>
+            <main class="mx-auto flex-1 ml-60">
                 <slot />
             </main>
         </div>

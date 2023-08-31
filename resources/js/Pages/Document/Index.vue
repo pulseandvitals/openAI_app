@@ -20,7 +20,7 @@ const destroy = (document) => {
     <Head title="Document" />
 
     <AuthenticatedLayout>
-        <template #header>
+        <template>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Document
             </h2>
@@ -28,8 +28,8 @@ const destroy = (document) => {
 
         <Success />
 
-        <div class="py-6">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid grid-cols-1">
                 <div class="overflow-hidden">
                     <div class="bg-white overflow-hidden mb-3 sm:rounded-lg">
                         <div class="px-6 py-4 border-b flex justify-end">

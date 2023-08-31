@@ -1,11 +1,22 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import Modal from "@/Components/Modal.vue";
+import SecondaryButton from "@/Components/SecondaryButton.vue";
+import { nextTick, ref } from "vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 
 defineProps({
     datas: Array,
     file_name: String,
 });
+const modalButtonVal = ref(false);
+const closeModal = () => {
+    modalButtonVal.value = false;
+};
+
+const modalButton = (keyword) => {
+    modalButtonVal.value = true;
+};
 </script>
 
 <template>
@@ -92,7 +103,7 @@ defineProps({
                             >
                                 <span
                                     :class="[
-                                        e.main_topic_1 ? 'text-green-500' : '',
+                                        e.main_topic_1 ? 'text-blue-500' : '',
                                     ]"
                                 >
                                     {{ e.main_topic_1 }}
@@ -134,7 +145,7 @@ defineProps({
                                 <span
                                     :class="[
                                         datas.sub_topic_2.value == e.sub_topic_2
-                                            ? 'text-green-500'
+                                            ? 'text-blue-500'
                                             : '',
                                     ]"
                                 >
@@ -178,7 +189,7 @@ defineProps({
                                 <span
                                     :class="[
                                         datas.sub_topic_3.value == e.sub_topic_3
-                                            ? 'text-green-500'
+                                            ? 'text-blue-500'
                                             : '',
                                     ]"
                                 >
@@ -246,13 +257,12 @@ defineProps({
                             >
                                 <span>
                                     {{ e.keyword }}
-                                    <Link
-                                        href=""
+                                    <button
+                                        @click="modalButton(e.keyword)"
                                         class="text-xs text-gray-300"
-                                        preserve-scroll
                                     >
-                                        Edit
-                                    </Link>
+                                        Generate
+                                    </button>
                                 </span>
                             </div>
                         </div>
@@ -260,5 +270,23 @@ defineProps({
                 </div>
             </div>
         </div>
+        <Modal :show="modalButtonVal" @close="closeModal">
+            <div class="p-6">
+                <h2 class="text-lg font-medium text-gray-900">
+                    Are you sure you want to delete your account?
+                </h2>
+
+                <p class="mt-1 text-sm text-gray-600">
+                    Once your account is deleted, all of its resources and data
+                    will be permanently deleted. Please enter your password to
+                    confirm you would like to permanently delete your account.
+                </p>
+                <div class="mt-6 flex justify-end">
+                    <SecondaryButton @click="closeModal">
+                        Cancel
+                    </SecondaryButton>
+                </div>
+            </div>
+        </Modal>
     </AuthenticatedLayout>
 </template>
