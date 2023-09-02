@@ -55,7 +55,6 @@ class GenerateDocumentService {
             ->get();
 
         $keywords = File::query()
-            ->select('keyword','document_id','id','is_completed')
             ->where([
                 'document_id' => $params['id'],
                 'sub_topic_3' => $child

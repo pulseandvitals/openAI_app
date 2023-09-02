@@ -57,16 +57,6 @@ class DocumentController extends Controller
         ]);
     }
 
-    public function edit(Document $document)
-    {
-        //
-    }
-
-    public function update(Request $request, Document $document)
-    {
-        //
-    }
-
     public function destroy(Document $document)
     {
         $document->delete();

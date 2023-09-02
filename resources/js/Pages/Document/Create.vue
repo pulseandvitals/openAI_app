@@ -69,11 +69,17 @@ const form = useForm({
                             </div>
                             <div>
                                 <input
-                                    class="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:placeholder-gray-400"
-                                    id="large_size"
+                                    class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-blue-300 focus:bg-blue-400 focus:shadow-te-primary focus:outline-none dark:border-neutral-600"
                                     type="file"
+                                    id="formFileMultiple"
                                     @input="form.url = $event.target.files[0]"
                                 />
+                                <InputError
+                                    class="mt-2"
+                                    :message="form.errors.url"
+                                />
+                            </div>
+                            <div>
                                 <progress
                                     v-if="form.progress"
                                     :value="form.progress.percentage"
@@ -81,15 +87,12 @@ const form = useForm({
                                 >
                                     {{ form.progress.percentage }}%
                                 </progress>
-
-                                <InputError
-                                    class="mt-2"
-                                    :message="form.errors.url"
-                                />
                             </div>
 
                             <div class="flex items-center gap-4">
-                                <PrimaryButton :disabled="form.processing"
+                                <PrimaryButton
+                                    :class="{ 'opacity-25': form.processing }"
+                                    :disabled="form.processing"
                                     >Import</PrimaryButton
                                 >
                             </div>

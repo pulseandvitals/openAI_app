@@ -14,7 +14,7 @@ import { Head, Link, useForm } from "@inertiajs/vue3";
             data-te-ripple-init
             data-te-ripple-color="primary"
         >
-            <span class="text-bold">Oner App</span>
+            <span class="font-mono font-bold text-lg">Nest18</span>
         </a>
         <div class="h-full px-3 py-4 overflow-y-auto bg-white rounded-lg">
             <ul class="space-y-2 font-medium">
