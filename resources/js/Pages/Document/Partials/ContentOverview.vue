@@ -1,3 +1,9 @@
+<script setup>
+defineProps({
+    counts: Object,
+});
+</script>
+
 <template>
     <div class="py-6 ml-8">
         <div class="bg-white overflow-hidden shadow-sm rounded-lg">
@@ -12,10 +18,10 @@
                 >
                     <div class="flex justify-between">
                         <div class="p-6 text-gray-900 text-lg font-extrabold">
-                            Not Started
+                            Total
                         </div>
                         <div class="p-6 text-blue-400 font-extrabold text-2xl">
-                            16
+                            {{ counts.total }}
                             <div class="text-gray-500 text-sm">16/16</div>
                         </div>
                     </div>
@@ -25,10 +31,10 @@
                 >
                     <div class="flex justify-between">
                         <div class="p-6 text-gray-900 text-lg font-extrabold">
-                            In Writing
+                            Completed
                         </div>
                         <div class="p-6 text-blue-400 font-extrabold text-2xl">
-                            16
+                            {{ counts.completed }}
                             <div class="text-gray-500 text-sm">16/16</div>
                         </div>
                     </div>
@@ -38,10 +44,10 @@
                 >
                     <div class="flex justify-between">
                         <div class="p-6 text-gray-900 text-lg font-extrabold">
-                            In Editing
+                            No URLs
                         </div>
                         <div class="p-6 text-blue-400 font-extrabold text-2xl">
-                            16
+                            {{ counts.no_urls }}
                             <div class="text-gray-500 text-sm">16/16</div>
                         </div>
                     </div>

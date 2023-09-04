@@ -4,14 +4,13 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Document;
-use App\Models\ImportData;
+use App\Models\File;
 use App\Imports\DataImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Resources\DocumentResource;
 use App\Http\Requests\Document\DocumentRequest;
-use App\Http\Resources\ImportDataResource;
-use App\Http\Resources\UserResource;
+use App\Http\Requests\Document\FileUpdateRequest;
 use App\Services\Document\StoreDocumentService;
 use App\Services\Document\GenerateDocumentService;
 
@@ -63,5 +62,26 @@ class DocumentController extends Controller
 
         return redirect()->route('document.index')
             ->with('message','Successfully deleted file named '.$document->original_name);
+    }
+    public function update($keyword, File $file, FileUpdateRequest $request)
+    {
+        $doc = $file->find($keyword);
+        $doc->update($request->only(
+            'url',
+            'main_topic_1',
+            'sub_topic_2',
+            'sub_topic_3',
+            'sub_topic_4',
+            'keyword',
+            'status',
+            'seo_title',
+            'serp_analysis',
+            'search_content',
+            'content_type',
+            'search_volume',
+            'cpc',
+        ));
+
+        return redirect()->back()->with('message','Updated successfully.');
     }
 }

@@ -60,6 +60,7 @@ Route::middleware('auth')->prefix('document')->name('document.')->group(function
     Route::post('/store',[DocumentController::class,'store'])->name('store');
     Route::delete('/{document}',[DocumentController::class,'destroy'])->name('destroy');
     Route::get('/show/{parent}/{child}/{document}',[DocumentController::class,'show'])->name('show');
+    Route::patch('/update/{keyword}',[DocumentController::class,'update'])->name('update');
 
     Route::prefix('article')->name('article.')->group(function () {
         Route::post('/generate-article/{keyword}', [ArticleController::class,'generateArticle'])->name('generate-article');

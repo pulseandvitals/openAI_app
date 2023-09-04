@@ -1,10 +1,9 @@
 <template>
     <div
-        class="max-w-7xl mx-auto sm:px-6 lg:px-8 bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mt-2"
+        class="fixed right-3 top-3 rounded-lg bg-blue-200 px-6 py-2"
         role="alert"
         v-if="$page.props.flash.message"
     >
-        <p class="font-bold">Success</p>
         <p>{{ $page.props.flash.message }}</p>
     </div>
 </template>

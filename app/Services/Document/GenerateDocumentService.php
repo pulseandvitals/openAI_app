@@ -61,6 +61,9 @@ class GenerateDocumentService {
             ])
             ->get();
 
+        $counts = File::query()
+            ->where('document_id', $params['id']);
+
         $data = [
             'main_topic_1' => $main_topic_1,
             'sub_topic_2' =>  [
@@ -78,6 +81,11 @@ class GenerateDocumentService {
             'keywords' => [
                 'data' => $keywords,
             ],
+            'counts' => [
+                'total' => $counts->count(),
+                'completed' => $counts->where('is_completed',1)->count(),
+                'no_urls' => $counts->orWhereNull('url')->where('document_id',$params['id'])->count()
+                ]
         ];
 
         return $data;
