@@ -28,7 +28,7 @@ const destroy = (document) => {
 
         <Success />
 
-        <div class="py-12">
+        <div class="py-6">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid grid-cols-1">
                 <div class="overflow-hidden">
                     <div class="bg-white overflow-hidden mb-3 sm:rounded-lg">

@@ -124,9 +124,9 @@ import { Head, Link, useForm } from "@inertiajs/vue3";
 
                 <Link
                     class="flex items-center p-2 rounded-lg text-gray-500 hover:text-white hover:bg-blue-500 group"
-                    :href="route('website.index')"
+                    :href="route('user.index')"
                     :class="[
-                        route().current('website.index')
+                        route().current('user.*')
                             ? 'bg-blue-500 text-white'
                             : '',
                     ]"

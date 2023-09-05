@@ -25,6 +25,8 @@ class ArticleController extends Controller
         $generatedArticle = $generateContentService->execute($new_keyword);
         $data = $storeArticleService->execute($kword,$generatedArticle);
 
+        return redirect()->back()->with('message','Successfully generated.');
+
     }
     public function destroy($keyword)
     {

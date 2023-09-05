@@ -12,7 +12,14 @@ class UserResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'email' => $this->email
+            'role' => $this->role == 1 ? 'Admin' : 'User',
+            'email' => $this->email,
+            'created' => !empty($this->created_at) ? $this->created_at->format('M, d Y H:i:s A') : null,
+            'routes' => [
+                'destroy' => route('user.destroy', $this),
+                'edit' => route('user.edit', $this),
+                'show' => route('user.show', $this)
+            ],
         ];
     }
 }

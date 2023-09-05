@@ -8,6 +8,7 @@ use Illuminate\Foundation\Application;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\GeneratorController;
+use App\Http\Controllers\UserController;
 use Illuminate\Console\GeneratorCommand;
 
 /*
@@ -52,6 +53,14 @@ Route::middleware('auth')->prefix('website')->name('website.')->group(function()
 Route::middleware('auth')->prefix('generator')->name('generator.')->group(function () {
     Route::get('/', [GeneratorController::class,'index'])->name('index');
     Route::post('/generate-content',[GeneratorController::class,'generateContent'])->name('generate-content');
+});
+
+Route::middleware('auth')->prefix('user')->name('user.')->group(function () {
+    Route::get('/',[UserController::class,'index'])->name('index');
+    Route::delete('/destroy/{user}',[UserController::class,'destroy'])->name('destroy');
+    Route::get('/create',[UserController::class,'create'])->name('create');
+    Route::get('/show/{user}',[UserController::class,'show'])->name('show');
+    Route::get('/edit/{user}',[UserController::class,'edit'])->name('edit');
 });
 
 Route::middleware('auth')->prefix('document')->name('document.')->group(function () {
