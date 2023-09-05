@@ -82,34 +82,6 @@ function submit(keyword) {
                 </div>
 
                 <div class="mt-6">
-                    <InputLabel for="Position" value="Position" />
-
-                    <TextInput
-                        id="position"
-                        ref="position"
-                        v-model="form.position"
-                        type="text"
-                        class="mt-1 block w-full"
-                    />
-
-                    <InputError :message="form.errors.position" class="mt-2" />
-                </div>
-
-                <div class="mt-6">
-                    <InputLabel for="status" value="Status" />
-
-                    <TextInput
-                        id="status"
-                        ref="status"
-                        v-model="form.status"
-                        type="text"
-                        class="mt-1 block w-full"
-                    />
-
-                    <InputError :message="form.errors.status" class="mt-2" />
-                </div>
-
-                <div class="mt-6">
                     <InputLabel for="Main Topic 1" value="Main Topic 1" />
 
                     <TextInput
@@ -190,101 +162,142 @@ function submit(keyword) {
 
                     <InputError :message="form.errors.keyword" class="mt-2" />
                 </div>
+                <div class="grid grid-cols-2 gap-5">
+                    <div class="mt-6">
+                        <InputLabel for="Position" value="Position" />
 
-                <div class="mt-6">
-                    <InputLabel for="SEO title" value="SEO Title" />
+                        <TextInput
+                            id="position"
+                            ref="position"
+                            v-model="form.position"
+                            type="text"
+                            class="mt-1 block w-full"
+                        />
 
-                    <TextInput
-                        id="seo_title"
-                        ref="seo_title"
-                        v-model="form.seo_title"
-                        type="text"
-                        class="mt-1 block w-full"
-                    />
+                        <InputError
+                            :message="form.errors.position"
+                            class="mt-2"
+                        />
+                    </div>
 
-                    <InputError :message="form.errors.seo_title" class="mt-2" />
-                </div>
+                    <div class="mt-6">
+                        <InputLabel for="status" value="Status" />
 
-                <div class="mt-6">
-                    <InputLabel for="SERP Analysis" value="SERP Analysis" />
+                        <TextInput
+                            id="status"
+                            ref="status"
+                            v-model="form.status"
+                            type="text"
+                            class="mt-1 block w-full"
+                        />
 
-                    <TextInput
-                        id="serp_analysis"
-                        ref="serp_analysis"
-                        v-model="form.serp_analysis"
-                        type="text"
-                        class="mt-1 block w-full"
-                    />
+                        <InputError
+                            :message="form.errors.status"
+                            class="mt-2"
+                        />
+                    </div>
 
-                    <InputError
-                        :message="form.errors.serp_analysis"
-                        class="mt-2"
-                    />
-                </div>
+                    <div class="mt-6">
+                        <InputLabel for="SEO title" value="SEO Title" />
 
-                <div class="mt-6">
-                    <InputLabel for="Content Type" value="Content Type" />
+                        <TextInput
+                            id="seo_title"
+                            ref="seo_title"
+                            v-model="form.seo_title"
+                            type="text"
+                            class="mt-1 block w-full"
+                        />
 
-                    <TextInput
-                        id="content_type"
-                        ref="content_type"
-                        v-model="form.content_type"
-                        type="text"
-                        class="mt-1 block w-full"
-                    />
+                        <InputError
+                            :message="form.errors.seo_title"
+                            class="mt-2"
+                        />
+                    </div>
 
-                    <InputError
-                        :message="form.errors.content_type"
-                        class="mt-2"
-                    />
-                </div>
+                    <div class="mt-6">
+                        <InputLabel for="SERP Analysis" value="SERP Analysis" />
 
-                <div class="mt-6">
-                    <InputLabel for="Search Content" value="Search Content" />
+                        <TextInput
+                            id="serp_analysis"
+                            ref="serp_analysis"
+                            v-model="form.serp_analysis"
+                            type="text"
+                            class="mt-1 block w-full"
+                        />
 
-                    <TextInput
-                        id="search_content"
-                        ref="search_content"
-                        v-model="form.search_content"
-                        type="text"
-                        class="mt-1 block w-full"
-                    />
+                        <InputError
+                            :message="form.errors.serp_analysis"
+                            class="mt-2"
+                        />
+                    </div>
 
-                    <InputError
-                        :message="form.errors.search_content"
-                        class="mt-2"
-                    />
-                </div>
+                    <div class="mt-6">
+                        <InputLabel for="Content Type" value="Content Type" />
 
-                <div class="mt-6">
-                    <InputLabel for="Search Volume" value="Search Volume" />
+                        <TextInput
+                            id="content_type"
+                            ref="content_type"
+                            v-model="form.content_type"
+                            type="text"
+                            class="mt-1 block w-full"
+                        />
 
-                    <TextInput
-                        id="search_volume"
-                        ref="search_volume"
-                        v-model="form.search_volume"
-                        type="text"
-                        class="mt-1 block w-full"
-                    />
+                        <InputError
+                            :message="form.errors.content_type"
+                            class="mt-2"
+                        />
+                    </div>
 
-                    <InputError
-                        :message="form.errors.search_volume"
-                        class="mt-2"
-                    />
-                </div>
+                    <div class="mt-6">
+                        <InputLabel
+                            for="Search Content"
+                            value="Search Content"
+                        />
 
-                <div class="mt-6">
-                    <InputLabel for="CPC" value="CPC" />
+                        <TextInput
+                            id="search_content"
+                            ref="search_content"
+                            v-model="form.search_content"
+                            type="text"
+                            class="mt-1 block w-full"
+                        />
 
-                    <TextInput
-                        id="cpc"
-                        ref="cpc"
-                        v-model="form.cpc"
-                        type="text"
-                        class="mt-1 block w-full"
-                    />
+                        <InputError
+                            :message="form.errors.search_content"
+                            class="mt-2"
+                        />
+                    </div>
 
-                    <InputError :message="form.errors.cpc" class="mt-2" />
+                    <div class="mt-6">
+                        <InputLabel for="Search Volume" value="Search Volume" />
+
+                        <TextInput
+                            id="search_volume"
+                            ref="search_volume"
+                            v-model="form.search_volume"
+                            type="text"
+                            class="mt-1 block w-full"
+                        />
+
+                        <InputError
+                            :message="form.errors.search_volume"
+                            class="mt-2"
+                        />
+                    </div>
+
+                    <div class="mt-6">
+                        <InputLabel for="CPC" value="CPC" />
+
+                        <TextInput
+                            id="cpc"
+                            ref="cpc"
+                            v-model="form.cpc"
+                            type="text"
+                            class="mt-1 block w-full"
+                        />
+
+                        <InputError :message="form.errors.cpc" class="mt-2" />
+                    </div>
                 </div>
 
                 <div class="mt-6 flex justify-end">

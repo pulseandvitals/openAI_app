@@ -1,6 +1,6 @@
 <template>
     <div
-        class="fixed right-[0] bottom-5 rounded-lg bg-green-200 px-6 py-2 flex item-center text-green-700"
+        class="fixed right-[0] bottom-5 rounded-lg bg-green-200 px-3 py-2 flex item-center text-green-700"
         role="alert"
         v-if="$page.props.flash.message"
     >
@@ -10,7 +10,7 @@
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="w-6 h-6"
+            class="w-6 h-6 mr-3"
         >
             <path
                 stroke-linecap="round"

@@ -2,7 +2,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import Table from "@/Components/Table.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
-import TextInput from "@/Components/TextInput.vue";
 
 defineProps({
     users: Array,
@@ -11,9 +10,7 @@ const form = useForm({});
 const destroy = (user) => {
     form.delete(user.routes.destroy, {
         onBefore: () =>
-            confirm(
-                "Are you sure you want to delete this website information?"
-            ),
+            confirm("Are you sure you want to delete this user information?"),
         preserveScroll: true,
     });
 };

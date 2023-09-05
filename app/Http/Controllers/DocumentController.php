@@ -42,8 +42,7 @@ class DocumentController extends Controller
             $user = auth()->id();
             Excel::import(new DataImport($document_id,$user), public_path($doc->file_url));
         }
-
-        return redirect()->route('document.index')->with('message','Successfully imported '.$doc->original_name);
+        return redirect()->route('document.index')->with('message','Successfully imported '.$doc->label);
     }
 
     public function show($parent,$child,Document $document,GenerateDocumentService $generateDocumentService)

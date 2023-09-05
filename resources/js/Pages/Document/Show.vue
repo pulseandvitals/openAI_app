@@ -4,13 +4,17 @@ import ContentOverview from "./Partials/ContentOverview.vue";
 import Success from "@/Components/Alert/Success.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 import ModalEditKeyword from "./Partials/ModalEditKeyword.vue";
+import { ref } from "vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 defineProps({
     datas: Object,
     file_name: String,
 });
 
+const checked = ref([]);
 const form = useForm({});
+
 const destroy = (keyword) => {
     form.delete(route("document.article.destroy", { keyword: keyword }), {
         onBefore: () =>
@@ -18,9 +22,9 @@ const destroy = (keyword) => {
         preserveScroll: true,
     });
 };
-const generateArticle = (keyword) => {
+const generateArticle = (keywords) => {
     form.post(
-        route("document.article.generate-article", { keyword: keyword }),
+        route("document.article.generate-article", { keywords: keywords }),
         {
             onBefore: () =>
                 confirm("Are you sure you want to generate this keywords?"),
@@ -32,7 +36,6 @@ const generateArticle = (keyword) => {
 
 <template>
     <Head :title="file_name" />
-
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -43,7 +46,6 @@ const generateArticle = (keyword) => {
         <ContentOverview :counts="datas.counts" />
 
         <Success />
-
         <div class="py-3 ml-8">
             <div class="max-w-12xl mx-auto sm:px-6 lg:px-8">
                 <div class="overflow-hidden">
@@ -52,25 +54,35 @@ const generateArticle = (keyword) => {
                             <div class="text-gray-600 font-extrabold text-2xl">
                                 {{ file_name }}
                             </div>
-                            <Link
-                                :href="route('document.create')"
-                                class="px-4 py-2 border border-none rounded-lg font-bold hover:shadow-lg"
-                                title="Export file"
-                                ><svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-6 h-6"
+                            <div class="flex items-center">
+                                <Link
+                                    :href="route('document.create')"
+                                    class="px-4 py-2 border border-none rounded-lg font-bold hover:shadow-lg mr-2"
+                                    title="Export file"
+                                    ><svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="1.5"
+                                        stroke="currentColor"
+                                        class="w-6 h-6"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+                                        />
+                                    </svg>
+                                </Link>
+                                <PrimaryButton
+                                    @click="generateArticle(checked)"
+                                    :class="{
+                                        'opacity-25': checked.length == 0,
+                                    }"
+                                    :disabled="checked.length == 0"
+                                    >Generate Articles</PrimaryButton
                                 >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
-                                    />
-                                </svg>
-                            </Link>
+                            </div>
                         </div>
                     </div>
 
@@ -241,30 +253,18 @@ const generateArticle = (keyword) => {
                                         : 'bg-white',
                                 ]"
                             >
-                                <span>
-                                    {{ e.keyword }}
-                                </span>
+                                <div class="flex items-center">
+                                    <input
+                                        type="checkbox"
+                                        v-model="checked"
+                                        :value="e.id"
+                                        class="mr-2"
+                                    />
+                                    <span>
+                                        {{ e.keyword }}
+                                    </span>
+                                </div>
                                 <div class="items-center">
-                                    <button
-                                        @click="generateArticle(e)"
-                                        class="font-xs text-gray-300 mr-2"
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke-width="1.5"
-                                            stroke="currentColor"
-                                            class="w-6 h-6 text-yellow-400"
-                                        >
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
-                                            />
-                                        </svg>
-                                    </button>
-
                                     <ModalEditKeyword :keyword="e" />
                                 </div>
                             </div>

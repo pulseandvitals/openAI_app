@@ -72,7 +72,7 @@ Route::middleware('auth')->prefix('document')->name('document.')->group(function
     Route::patch('/update/{keyword}',[DocumentController::class,'update'])->name('update');
 
     Route::prefix('article')->name('article.')->group(function () {
-        Route::post('/generate-article/{keyword}', [ArticleController::class,'generateArticle'])->name('generate-article');
+        Route::post('/generate-article/{keywords}', [ArticleController::class,'generateArticle'])->name('generate-article');
         Route::delete('/destroy/{keyword}', [ArticleController::class,'destroy'])->name('destroy');
     });
 });
