@@ -259,6 +259,7 @@ const generateArticle = (keywords) => {
                                         v-model="checked"
                                         :value="e.id"
                                         class="mr-2"
+                                        v-if="!e.is_completed"
                                     />
                                     <span>
                                         {{ e.keyword }}
