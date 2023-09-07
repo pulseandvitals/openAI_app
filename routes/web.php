@@ -59,8 +59,9 @@ Route::middleware('auth')->prefix('user')->name('user.')->group(function () {
     Route::get('/',[UserController::class,'index'])->name('index');
     Route::delete('/destroy/{user}',[UserController::class,'destroy'])->name('destroy');
     Route::get('/create',[UserController::class,'create'])->name('create');
+    Route::post('/store',[UserController::class,'store'])->name('store');
     Route::get('/show/{user}',[UserController::class,'show'])->name('show');
-    Route::get('/edit/{user}',[UserController::class,'edit'])->name('edit');
+    Route::patch('/update/{user}',[UserController::class,'update'])->name('update');
 });
 
 Route::middleware('auth')->prefix('document')->name('document.')->group(function () {

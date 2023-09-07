@@ -17,7 +17,7 @@ defineProps({
                     class="bg-blue-100 overflow-hidden shadow-sm rounded-lg my-5"
                 >
                     <div class="flex justify-between">
-                        <div class="p-6 text-gray-900 text-lg font-extrabold">
+                        <div class="p-6 text-gray-500 text-lg font-extrabold">
                             Total
                         </div>
                         <div class="p-6 text-blue-400 font-extrabold text-2xl">
@@ -30,7 +30,7 @@ defineProps({
                     class="bg-blue-100 overflow-hidden shadow-sm rounded-lg my-5"
                 >
                     <div class="flex justify-between">
-                        <div class="p-6 text-gray-900 text-lg font-extrabold">
+                        <div class="p-6 text-gray-500 text-lg font-extrabold">
                             Completed
                         </div>
                         <div class="p-6 text-blue-400 font-extrabold text-2xl">
@@ -43,7 +43,7 @@ defineProps({
                     class="bg-blue-100 overflow-hidden shadow-sm rounded-lg my-5"
                 >
                     <div class="flex justify-between">
-                        <div class="p-6 text-gray-900 text-lg font-extrabold">
+                        <div class="p-6 text-gray-500 text-lg font-extrabold">
                             No URLs
                         </div>
                         <div class="p-6 text-blue-400 font-extrabold text-2xl">
@@ -56,7 +56,7 @@ defineProps({
                     class="bg-blue-100 overflow-hidden shadow-sm rounded-lg my-5"
                 >
                     <div class="flex justify-between">
-                        <div class="p-6 text-gray-900 text-lg font-extrabold">
+                        <div class="p-6 text-gray-500 text-lg font-extrabold">
                             Uploading
                         </div>
                         <div class="p-6 text-blue-400 font-extrabold text-2xl">
@@ -69,7 +69,7 @@ defineProps({
                     class="bg-blue-100 overflow-hidden shadow-sm rounded-lg my-5"
                 >
                     <div class="flex justify-between">
-                        <div class="p-6 text-gray-900 text-lg font-extrabold">
+                        <div class="p-6 text-gray-500 text-lg font-extrabold">
                             Published
                         </div>
                         <div class="p-6 text-blue-400 font-extrabold text-2xl">

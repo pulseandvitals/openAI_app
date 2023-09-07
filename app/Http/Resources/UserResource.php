@@ -17,7 +17,6 @@ class UserResource extends JsonResource
             'created' => !empty($this->created_at) ? $this->created_at->format('M, d Y H:i:s A') : null,
             'routes' => [
                 'destroy' => route('user.destroy', $this),
-                'edit' => route('user.edit', $this),
                 'show' => route('user.show', $this)
             ],
         ];
