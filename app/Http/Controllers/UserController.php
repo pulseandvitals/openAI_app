@@ -6,7 +6,6 @@ use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 
 class UserController extends Controller
@@ -19,6 +18,11 @@ class UserController extends Controller
 
         return Inertia::render('User/Index', [
             'users' => UserResource::collection($user),
+            'counts' => [
+                    'admin' => $user->where('role',User::ADMIN)->count(),
+                    'user' => $user->where('role', User::USER)->count(),
+                    'total' => $user->count()
+            ],
         ]);
     }
 
@@ -27,11 +31,6 @@ class UserController extends Controller
         return Inertia::render('User/Create', [
             'generatedPassword' => Str::random(6),
         ]);
-    }
-
-    public function show(User $user)
-    {
-        dd($user);
     }
 
     public function store(UserRequest $request,User $user)

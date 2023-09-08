@@ -1,7 +1,6 @@
 <script setup>
 defineProps({
     counts: Object,
-    file_name: String,
 });
 </script>
 
@@ -9,7 +8,7 @@ defineProps({
     <div class="py-6 ml-8">
         <div class="bg-white overflow-hidden shadow-sm rounded-lg">
             <div class="p-6 text-2xl text-gray-500 font-bold">
-                {{ file_name }}
+                Project Overview
             </div>
             <div
                 class="max-w-12xl mx-auto sm:px-6 lg:px-8 grid grid-cols-5 gap-5"
@@ -22,7 +21,7 @@ defineProps({
                             Total
                         </div>
                         <div class="p-6 text-blue-400 font-extrabold text-2xl">
-                            {{ counts.total }}
+                            16
                             <div class="text-gray-500 text-sm">16/16</div>
                         </div>
                     </div>
@@ -35,7 +34,7 @@ defineProps({
                             Completed
                         </div>
                         <div class="p-6 text-blue-400 font-extrabold text-2xl">
-                            {{ counts.completed }}
+                            16
                             <div class="text-gray-500 text-sm">16/16</div>
                         </div>
                     </div>
@@ -48,7 +47,7 @@ defineProps({
                             No URLs
                         </div>
                         <div class="p-6 text-blue-400 font-extrabold text-2xl">
-                            {{ counts.no_urls }}
+                            16
                             <div class="text-gray-500 text-sm">16/16</div>
                         </div>
                     </div>

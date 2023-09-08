@@ -1,23 +1,21 @@
 <script setup>
 import { Head, Link, useForm } from "@inertiajs/vue3";
+import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 </script>
 
 <template>
     <aside
         id="default-sidebar"
-        class="h-screen fixed p-30 top-0 left-2 z-40 w-64 transition-transform"
+        class="h-screen fixed p-30 top-0 z-40 w-64 transition-transform"
         aria-label="Sidebar"
     >
-        <a
-            class="flex items-center justify-center border-none py-6 outline-none"
-            href="#!"
-            data-te-ripple-init
-            data-te-ripple-color="primary"
-        >
-            <span class="font-mono font-bold text-lg">Nest18</span>
-        </a>
         <div class="h-full px-3 py-4 overflow-y-auto bg-white rounded-lg">
-            <ul class="space-y-2 font-medium">
+            <div class="flex justify-start items-center">
+                <span class="font-bold text-blue-300 text-lg"> Nest18</span>
+                <ApplicationLogo class="w-10 h-10 ml-2" />
+            </div>
+
+            <ul class="space-y-2 font-medium mt-5">
                 <Link
                     class="flex items-center p-2 rounded-lg text-gray-500 hover:text-white hover:bg-blue-500 group"
                     :href="route('dashboard')"
@@ -45,10 +43,6 @@ import { Head, Link, useForm } from "@inertiajs/vue3";
                     <span class="flex-1 ml-3 whitespace-nowrap">Dashboard</span>
                 </Link>
 
-                <div class="inline-flex items-center justify-center w-full">
-                    <hr class="w-64 h-px bg-gray-300 border-0" />
-                </div>
-
                 <Link
                     class="flex items-center p-2 rounded-lg text-gray-500 hover:text-white hover:bg-blue-500 group"
                     :href="route('document.index')"
@@ -73,7 +67,9 @@ import { Head, Link, useForm } from "@inertiajs/vue3";
                         />
                     </svg>
 
-                    <span class="flex-1 ml-3 whitespace-nowrap">Document</span>
+                    <span class="flex-1 ml-3 whitespace-nowrap"
+                        >Topical Map</span
+                    >
                 </Link>
 
                 <Link

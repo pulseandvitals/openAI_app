@@ -2,6 +2,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import Success from "@/Components/Alert/Success.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
+import ProjectOverview from "./Partials/ProjectOverview.vue";
 
 defineProps({
     documents: Array,
@@ -27,9 +28,10 @@ const destroy = (document) => {
         </template>
 
         <Success />
+        <ProjectOverview />
 
-        <div class="py-6">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid grid-cols-1">
+        <div class="py-3 ml-8">
+            <div class="max-w-12xl mx-auto sm:px-6 lg:px-8">
                 <div class="overflow-hidden">
                     <div class="bg-white overflow-hidden mb-3 sm:rounded-lg">
                         <div class="px-6 py-4 border-b flex justify-end">
@@ -79,7 +81,7 @@ const destroy = (document) => {
                     >
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                             <div
-                                class="bg-white overflow-hidden shadow-sm sm:rounded-lg"
+                                class="bg-white overflow-hidden shadow-sm sm:rounded-lg hover:bg-gray-50 active:bg-gray-100"
                             >
                                 <div
                                     class="px-6 py-4 border-b flex justify-between items-center"

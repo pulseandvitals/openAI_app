@@ -1,11 +1,12 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import ContentOverview from "./Partials/ContentOverview.vue";
-import Success from "@/Components/Alert/Success.vue";
-import { Head, Link, useForm } from "@inertiajs/vue3";
 import ModalEditKeyword from "./Partials/ModalEditKeyword.vue";
-import { ref } from "vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import Success from "@/Components/Alert/Success.vue";
+import TextInput from "@/Components/TextInput.vue";
+import { Head, Link, useForm } from "@inertiajs/vue3";
+import { ref } from "vue";
 
 defineProps({
     datas: Object,
@@ -43,16 +44,33 @@ const generateArticle = (keywords) => {
             </h2>
         </template>
 
-        <ContentOverview :counts="datas.counts" />
+        <ContentOverview :counts="datas.counts" :file_name="file_name" />
 
         <Success />
+
         <div class="py-3 ml-8">
             <div class="max-w-12xl mx-auto sm:px-6 lg:px-8">
                 <div class="overflow-hidden">
                     <div class="bg-white overflow-hidden mb-3 rounded-lg">
-                        <div class="px-6 py-4 border-b flex justify-between">
-                            <div class="text-gray-600 font-extrabold text-2xl">
-                                {{ file_name }}
+                        <div class="px-6 py-4 flex justify-between">
+                            <div class="flex items-center">
+                                <TextInput class="block mr-2" />
+                                <PrimaryButton
+                                    ><svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="1.5"
+                                        stroke="currentColor"
+                                        class="w-6 h-6"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                                        />
+                                    </svg>
+                                </PrimaryButton>
                             </div>
                             <div class="flex items-center">
                                 <Link
@@ -108,7 +126,7 @@ const generateArticle = (keywords) => {
 
                         <div class="font-bold">
                             <div
-                                class="p-4 bg-white self-start mt-2 flex justify-between rounded-lg"
+                                class="p-4 bg-white self-start mt-2 text-gray-400 flex justify-between rounded-lg hover:bg-gray-50 active:bg-gray-100"
                                 v-for="e in datas.main_topic_1"
                                 :key="e.id"
                             >
@@ -149,7 +167,7 @@ const generateArticle = (keywords) => {
                         </div>
                         <div class="font-bold">
                             <div
-                                class="p-4 bg-white self-start mt-2 flex justify-between rounded-lg"
+                                class="p-4 bg-white self-start mt-2 text-gray-400 flex justify-between rounded-lg hover:bg-gray-50 active:bg-gray-100"
                                 v-for="e in datas.sub_topic_2.data"
                                 :key="e.id"
                             >
@@ -193,7 +211,7 @@ const generateArticle = (keywords) => {
                         </div>
                         <div class="font-bold">
                             <div
-                                class="p-4 bg-white self-start mt-2 flex justify-between rounded-lg"
+                                class="p-4 bg-white self-start mt-2 text-gray-400 flex justify-between rounded-lg hover:bg-gray-50 active:bg-gray-100"
                                 v-for="e in datas.sub_topic_3.data"
                                 :key="e.id"
                             >
@@ -244,7 +262,7 @@ const generateArticle = (keywords) => {
 
                         <div class="font-bold">
                             <div
-                                class="p-4 self-start mt-2 rounded-lg flex justify-between"
+                                class="p-4 self-start mt-2 text-gray-400 rounded-lg flex justify-between hover:bg-gray-50 active:bg-gray-100"
                                 v-for="e in datas.keywords.data"
                                 :key="e.id"
                                 :class="[

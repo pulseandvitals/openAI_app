@@ -1,12 +1,15 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import Table from "@/Components/Table.vue";
+import Badge from "@/Components/Badge.vue";
 import EditUserModal from "./Partials/EditUserModal.vue";
+import UserOverview from "./Partials/UserOverview.vue";
 import Success from "@/Components/Alert/Success.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 
 defineProps({
     users: Array,
+    counts: Array,
 });
 const form = useForm({});
 const destroy = (user) => {
@@ -30,7 +33,9 @@ const destroy = (user) => {
 
         <Success />
 
-        <div class="py-6">
+        <UserOverview :counts="counts" />
+
+        <div class="py-3">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="overflow-hidden">
                     <div class="bg-white overflow-hidden mb-3 rounded-lg">
@@ -99,15 +104,7 @@ const destroy = (user) => {
                                         scope="row"
                                         class="px-6 py-4 font-medium text-gray-400 whitespace-nowrap"
                                     >
-                                        <div
-                                            :class="[
-                                                user.role == 'Admin'
-                                                    ? 'bg-green-100 text-green-800 text-xs font-medium text-center px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300'
-                                                    : 'bg-blue-100 text-blue-800 text-xs font-medium text-center px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300',
-                                            ]"
-                                        >
-                                            {{ user.role }}
-                                        </div>
+                                        <Badge :status="user.role" />
                                     </td>
                                     <td class="px-6 py-4 text-end">
                                         <EditUserModal :user="user" />
