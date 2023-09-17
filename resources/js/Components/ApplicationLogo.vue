@@ -1,3 +1,3 @@
 <template>
-    <img :src="'./logo/tm-logo.png'" />
+    <img :src="'/' + 'logo/tm-logo.png'" />
 </template>

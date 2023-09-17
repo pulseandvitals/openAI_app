@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
 use App\Models\File;
+use Inertia\Inertia;
+use App\Models\Article;
+use Illuminate\Http\Request;
 use App\Services\Article\StoreArticleService;
 use App\Services\Generator\GenerateContentService;
-use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
@@ -31,8 +32,11 @@ class ArticleController extends Controller
         return redirect()->back()->with('message','Successfully generated.');
 
     }
-    public function destroy($keyword)
+    public function show($keyword)
     {
-        dd($keyword);
+        $article = File::find($keyword);
+        return Inertia::render('Document/Article/Show', [
+            'article' => $article
+        ]);
     }
 }
