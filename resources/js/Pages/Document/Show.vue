@@ -262,7 +262,7 @@ const generateArticle = (keywords) => {
 
                         <div class="font-bold">
                             <div
-                                class="p-4 self-start mt-2 text-gray-400 rounded-lg flex justify-between hover:bg-gray-50 active:bg-gray-100"
+                                class="p-4 self-start mt-2 text-gray-400 rounded-lg flex justify-between"
                                 v-for="e in datas.keywords.data"
                                 :key="e.id"
                                 :class="[
@@ -286,6 +286,7 @@ const generateArticle = (keywords) => {
                                 <div class="align items-end">
                                     <ModalEditKeyword :keyword="e" />
                                     <Link
+                                        class="text-gray-300"
                                         :href="
                                             route('document.article.show', {
                                                 keyword: e,
