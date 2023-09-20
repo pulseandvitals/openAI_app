@@ -16,7 +16,7 @@ class File extends Model
     protected $fillable = [
         'user_id',
         'document_id',
-        'is_completed',
+        'is_article_completed',
         'url',
         'position',
         'status',

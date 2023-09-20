@@ -74,8 +74,10 @@ Route::middleware('auth')->prefix('document')->name('document.')->group(function
 
     Route::prefix('article')->name('article.')->group(function () {
         Route::post('/generate-article/{keywords}', [ArticleController::class,'generateArticle'])->name('generate-article');
-        Route::delete('/destroy/{keyword}', [ArticleController::class,'destroy'])->name('destroy');
+        Route::delete('/destroy/{prompt}', [ArticleController::class,'destroy'])->name('destroy');
         Route::get('/{keyword}',[ArticleController::class,'show'])->name('show');
+        Route::post('/generate-single-article/{article}',[ArticleController::class,'generateSingleArticle'])->name('generate-single-article');
+        Route::patch('/submit-article/{article}',[ArticleController::class,'submitArticle'])->name('submit-article');
     });
 });
 require __DIR__.'/auth.php';

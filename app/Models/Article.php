@@ -17,6 +17,7 @@ class Article extends Model
         'user_id',
         'document_id',
         'topical_map_id',
+        'is_completed',
         'article',
         'web_url',
         'token'

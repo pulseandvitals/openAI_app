@@ -76,10 +76,7 @@ function submit() {
                             </div>
 
                             <div>
-                                <InputLabel
-                                    for="password"
-                                    value="Generated Password"
-                                />
+                                <InputLabel for="password" value="Password" />
 
                                 <TextInput
                                     id="password"
@@ -87,6 +84,11 @@ function submit() {
                                     class="mt-1 block w-full"
                                     v-model="form.password"
                                 />
+                                <span class="text-gray-300 text-xs">
+                                    Please note that this field is just a
+                                    generated password for new user. They can
+                                    just change it when they logged in.
+                                </span>
 
                                 <InputError
                                     class="mt-2"

@@ -19,11 +19,6 @@ class StoreArticleService {
             'token' => Str::random(32),
         ]);
 
-        $file = File::find($params['id']);
-        $file->update([
-            'is_completed' => 1
-        ]);
-
         return $article;
     }
 }

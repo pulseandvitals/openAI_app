@@ -16,6 +16,7 @@ return new class extends Migration
             $table->uuid('user_id')->foreign('id')->on('users')->onDelete('cascade');
             $table->uuid('document_id')->foreign('id')->on('documents')->onDelete('cascade');
             $table->uuid('topical_map_id')->foreign('id')->on('files')->onDelete('cascade');
+            $table->boolean('is_completed')->default(0);
             $table->text('article')->nullable();
             $table->text('web_url')->nullable();
             $table->text('token')->nullable();

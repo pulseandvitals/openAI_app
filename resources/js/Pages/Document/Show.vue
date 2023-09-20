@@ -104,7 +104,7 @@ const generateArticle = (keywords) => {
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-4 gap-5">
+                    <div class="grid grid-cols-5 gap-5">
                         <div class="p-4 bg-blue-200 rounded-lg">
                             <div class="text-center">
                                 Main Topic (Pillar Silos)
@@ -119,6 +119,9 @@ const generateArticle = (keywords) => {
                             <div class="text-center">
                                 Sub Topic 3 (Clusters)
                             </div>
+                        </div>
+                        <div class="p-4 bg-blue-200 rounded-lg">
+                            <div class="text-center">Sub Topic 4</div>
                         </div>
                         <div class="p-4 bg-blue-200 rounded-lg">
                             <div class="text-center">Keywords</div>
@@ -262,11 +265,29 @@ const generateArticle = (keywords) => {
 
                         <div class="font-bold">
                             <div
+                                class="p-4 bg-white self-start mt-2 text-gray-400 flex justify-between rounded-lg hover:bg-gray-50 active:bg-gray-100"
+                                v-for="e in datas.sub_topic_4.data"
+                                :key="e.id"
+                            >
+                                <span
+                                    :class="[
+                                        datas.sub_topic_4.value == e.sub_topic_4
+                                            ? 'text-blue-500'
+                                            : '',
+                                    ]"
+                                >
+                                    {{ e.sub_topic_4 }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="font-bold">
+                            <div
                                 class="p-4 self-start mt-2 text-gray-400 rounded-lg flex justify-between"
                                 v-for="e in datas.keywords.data"
                                 :key="e.id"
                                 :class="[
-                                    e.is_completed
+                                    e.is_article_completed
                                         ? 'bg-green-200 text-green-500'
                                         : 'bg-white',
                                 ]"

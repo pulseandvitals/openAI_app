@@ -83,7 +83,7 @@ class GenerateDocumentService {
             ],
             'counts' => [
                 'total' => $counts->count(),
-                'completed' => $counts->where('is_completed',1)->count(),
+                'completed' => $counts->where('is_article_completed',1)->count(),
                 'no_urls' => $counts->orWhereNull('url')->where('document_id',$params['id'])->count()
                 ]
         ];
