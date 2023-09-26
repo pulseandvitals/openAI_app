@@ -200,7 +200,13 @@ const generateSingleArticle = (article) => {
                         <div class="px-6 py-4">
                             <div class="flex justify-between mb-2">
                                 <InputLabel for="keyword" value="Output" />
-                                <Link @click="destroy(prompt.id)">
+                                <Link
+                                    @click="destroy(prompt.id)"
+                                    :class="{
+                                        'opacity-25': prompt.response == null,
+                                    }"
+                                    :disabled="prompt.response == null"
+                                >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
@@ -229,9 +235,11 @@ const generateSingleArticle = (article) => {
                                         the result of all the content you've
                                         provided to AI.
                                     </span>
-                                    <span class="text-gray-500 text-xs">{{
-                                        prompt.created
-                                    }}</span>
+                                    <div>
+                                        <span class="text-gray-500 text-xs">{{
+                                            "Generated at " + prompt.created
+                                        }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
