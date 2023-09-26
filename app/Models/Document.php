@@ -16,7 +16,8 @@ class Document extends Model
     protected $fillable = [
         'label',
         'user_id',
-        'file_url'
+        'file_url',
+        'website_url'
     ];
 
     public function user()

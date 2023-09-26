@@ -16,6 +16,7 @@ return new class extends Migration
             $table->uuid('user_id')->foreign('id')->on('users')->onDelete('cascade');
             $table->uuid('document_id')->foreign('id')->on('documents')->onDelete('cascade');
             $table->boolean('is_article_completed')->default(0);
+            $table->string('website_url')->nullable();
             $table->string('url')->nullable();
             $table->bigInteger('position')->nullable();
             $table->string('status')->nullable();

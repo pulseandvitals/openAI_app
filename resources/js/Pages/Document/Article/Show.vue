@@ -1,9 +1,9 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import DangerButton from "@/Components/DangerButton.vue";
 import Success from "@/Components/Alert/Success.vue";
 import InputLabel from "@/Components/InputLabel.vue";
+import TextAreaEditor from "@/Components/TextAreaEditor.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 
@@ -13,6 +13,7 @@ let props = defineProps({
     related_info: Object,
 });
 let form = useForm({
+    website_url: "",
     keyword: props.article.keyword,
     additional_info: props.related_info,
     options: "",
@@ -89,81 +90,116 @@ const generateSingleArticle = (article) => {
                         Back
                     </Link>
                 </div>
-                <div class="grid grid-cols-2 gap-5"></div>
-                <div class="overflow-hidden">
-                    <div class="bg-white mb-3 rounded-lg">
-                        <div class="px-6 py-4">
-                            <InputLabel for="keyword" value="Keyword" />
-                            <TextInput
-                                class="mt-1 block w-full"
-                                type="text"
-                                v-model="form.keyword"
-                            />
-                            <span class="text-gray-300 text-xs">
-                                Heres the main keyword for generating article.
-                                (Editable)
-                            </span>
+
+                <div class="grid grid-cols-2 gap-5">
+                    <div class="overflow-hidden">
+                        <div class="bg-white mb-3 rounded-lg">
+                            <div class="px-6 py-4">
+                                <InputLabel for="Url" value="Url" />
+                                <div class="flex justify-between items-center">
+                                    <span class="font-bold mr-2">{{
+                                        article.website_url + "/"
+                                    }}</span>
+                                    <TextInput
+                                        class="mt-1 block w-full"
+                                        type="text"
+                                        placeholder="example-slug-endpoint"
+                                        v-model="form.website_url"
+                                    />
+                                </div>
+                                <span class="text-gray-300 text-xs">
+                                    Heres the Url for endpoints. Make it slug
+                                    for better naming of your endpoints. (EG:
+                                    make-it-like-this) (Editable)
+                                </span>
+
+                                <InputLabel for="keyword" value="Keyword" />
+                                <TextInput
+                                    class="mt-1 block w-full"
+                                    type="text"
+                                    v-model="form.keyword"
+                                />
+                                <span class="text-gray-300 text-xs">
+                                    Heres the main keyword for generating
+                                    article. (Editable)
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white mb-3 rounded-lg">
+                            <div class="px-6 py-4">
+                                <InputLabel
+                                    for="keyword"
+                                    value="Additional details to support your Keyword"
+                                />
+                                <TextInput
+                                    class="mt-1 block w-full"
+                                    type="text"
+                                    v-model="form.additional_info"
+                                />
+                                <span class="text-gray-300 text-xs">
+                                    Please note that this field works separated
+                                    with comma or "," (Eg: Chair,Table)
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white mb-3 rounded-lg">
+                            <div class="px-6 py-4">
+                                <InputLabel
+                                    for="options"
+                                    value="Options"
+                                    class="mt-1"
+                                />
+
+                                <select
+                                    v-model="form.options"
+                                    class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full"
+                                >
+                                    <option value=""></option>
+                                    <option value="singular">Singular</option>
+                                    <option value="plural">Plural</option>
+                                </select>
+                                <InputLabel
+                                    for="type"
+                                    value="Outline Format"
+                                    class="mt-1"
+                                />
+                                <select
+                                    v-model="form.outline_format"
+                                    class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full"
+                                >
+                                    <option value=""></option>
+                                    <option value="bullet">
+                                        Bullet Format
+                                    </option>
+                                    <option value="html">HTML Format</option>
+                                    <option value="numbering">
+                                        Number Format
+                                    </option>
+                                </select>
+                                <span class="text-gray-300 text-xs">
+                                    Please note that these fields are Optional.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="bg-white mb-3 rounded-lg">
+                            <div class="px-6 py-4">
+                                <InputLabel for="keyword" value="Entities" />
+                                <textarea
+                                    type="text"
+                                    rows="15"
+                                    v-model="form.prompt"
+                                    class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                />
+                            </div>
                         </div>
                     </div>
 
-                    <div class="bg-white mb-3 rounded-lg">
-                        <div class="px-6 py-4">
-                            <InputLabel
-                                for="keyword"
-                                value="Additional details to support your Keyword"
-                            />
-                            <TextInput
-                                class="mt-1 block w-full"
-                                type="text"
-                                v-model="form.additional_info"
-                            />
-                            <span class="text-gray-300 text-xs">
-                                Please note that this field works separated with
-                                comma or "," (Eg: Chair,Table)
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="bg-white mb-3 rounded-lg">
-                        <div class="px-6 py-4">
-                            <InputLabel
-                                for="options"
-                                value="Options"
-                                class="mt-1"
-                            />
-
-                            <select
-                                v-model="form.options"
-                                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full"
-                            >
-                                <option value=""></option>
-                                <option value="singular">Singular</option>
-                                <option value="plural">Plural</option>
-                            </select>
-                            <InputLabel
-                                for="type"
-                                value="Outline Format"
-                                class="mt-1"
-                            />
-                            <select
-                                v-model="form.outline_format"
-                                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full"
-                            >
-                                <option value=""></option>
-                                <option value="bullet">Bullet Format</option>
-                                <option value="html">HTML Format</option>
-                                <option value="numbering">Number Format</option>
-                            </select>
-                            <span class="text-gray-300 text-xs">
-                                Please note that these fields are Optional.
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="bg-white mb-3 rounded-lg">
+                    <div class="bg-white mb-3 rounded-lg self-start">
                         <div class="px-6 py-4">
                             <div class="flex justify-between mb-2">
-                                <InputLabel for="keyword" value="AI Prompt" />
+                                <InputLabel for="keyword" value="Output" />
                                 <Link @click="destroy(prompt.id)">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -181,22 +217,22 @@ const generateSingleArticle = (article) => {
                                     </svg>
                                 </Link>
                             </div>
-                            <textarea
-                                type="text"
-                                rows="10"
-                                class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                                v-model="form.prompt"
-                            />
+
                             <div class="flex justify-between mb-2">
-                                <span class="text-gray-300 text-xs">
-                                    Please note that this section generates the
-                                    result of all the content you've provided to
-                                    AI. (Click generate when done providing all
-                                    the details.)
-                                </span>
-                                <span class="text-gray-500 text-xs">{{
-                                    prompt.created
-                                }}</span>
+                                <div class="px-2 py-3">
+                                    <TextAreaEditor
+                                        class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                        v-model="form.prompt"
+                                    />
+                                    <span class="text-gray-300 text-xs">
+                                        Please note that this section generates
+                                        the result of all the content you've
+                                        provided to AI.
+                                    </span>
+                                    <span class="text-gray-500 text-xs">{{
+                                        prompt.created
+                                    }}</span>
+                                </div>
                             </div>
                         </div>
                     </div>

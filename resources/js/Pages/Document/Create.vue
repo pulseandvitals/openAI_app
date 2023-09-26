@@ -8,6 +8,7 @@ import { Head, Link, useForm } from "@inertiajs/vue3";
 const form = useForm({
     label: "",
     url: "",
+    website_url: "",
 });
 </script>
 
@@ -65,6 +66,20 @@ const form = useForm({
                                 <InputError
                                     class="mt-2"
                                     :message="form.errors.label"
+                                />
+                            </div>
+                            <div>
+                                <TextInput
+                                    id="type"
+                                    type="text"
+                                    class="mt-1 block w-full"
+                                    placeholder="www.sample.com"
+                                    v-model="form.website_url"
+                                />
+
+                                <InputError
+                                    class="mt-2"
+                                    :message="form.errors.website_url"
                                 />
                             </div>
                             <div>

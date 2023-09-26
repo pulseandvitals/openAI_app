@@ -9,18 +9,20 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 class DataImport implements ToModel,WithHeadingRow
 {
 
-    private $document_id, $user;
+    private $document_id, $user, $web_url;
 
-    public function __construct(String $document_id, String $user) {
+    public function __construct(String $document_id, String $user, String $web_url) {
 
         $this->document_id = $document_id;
         $this->user = $user;
+        $this->web_url = $web_url;
     }
     public function model(array $data)
     {
         return new File([
             'user_id' => $this->user,
             'document_id' => $this->document_id,
+            'website_url' => $this->web_url,
             'url' => $data['web_url'],
             'position' => $data['position'],
             'status' => $data['status'],
