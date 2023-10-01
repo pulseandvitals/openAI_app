@@ -44,7 +44,6 @@ class GenerateDocumentService {
             ->get();
 
         $sub_topic_4 = File::query()
-            ->select('sub_topic_4','document_id','sub_topic_3')
             ->where('sub_topic_4','!=',$child)
             ->where([
                 'document_id' => $params['id'],
@@ -52,7 +51,19 @@ class GenerateDocumentService {
             ])
             ->distinct()
             ->whereNotNull(['sub_topic_4'])
-            ->get();
+            ->get(['sub_topic_4','document_id','sub_topic_3']);
+
+        $sub_topic_4_empty = File::query()
+            ->where('sub_topic_4',$child)
+            ->where([
+                'document_id' => $params['id'],
+                'sub_topic_3' => $child,
+            ])
+            ->distinct()
+            ->whereNotNull(['sub_topic_4'])
+            ->get(['sub_topic_4','document_id','sub_topic_3']);
+
+        $st4 = count($sub_topic_4) > 1 ? $sub_topic_4 : $sub_topic_4_empty;
 
         $keywords = File::query()
             ->where([
@@ -75,7 +86,7 @@ class GenerateDocumentService {
                 'value' => $child
             ],
             'sub_topic_4' => [
-                'data' => $sub_topic_4 ?? null,
+                'data' => $st4,
                 'value' => $parent != $child ? $parent : $child
             ],
             'keywords' => [
@@ -87,7 +98,6 @@ class GenerateDocumentService {
                 'no_urls' => $counts->orWhereNull('url')->where('document_id',$params['id'])->count()
                 ]
         ];
-
         return $data;
     }
 }

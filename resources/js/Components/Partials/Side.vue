@@ -47,6 +47,11 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 
                 <Link
                     class="flex items-center p-2 rounded-lg text-gray-500 hover:text-white hover:bg-blue-500 group"
+                    :class="[
+                        route().current('document.heading.*')
+                            ? 'bg-blue-500 text-white'
+                            : '',
+                    ]"
                 >
                     <svg
                         class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 d dark:text-blue-400 group-hover:text-gray-900 dark:group-hover:text-white"

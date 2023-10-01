@@ -265,19 +265,35 @@ const generateArticle = (keywords) => {
 
                         <div class="font-bold">
                             <div
-                                class="p-4 bg-white self-start mt-2 text-gray-400 flex justify-between rounded-lg hover:bg-gray-50 active:bg-gray-100"
+                                class="p-4 bg-white self-start mt-2 text-gray-400 flex justify-between rounded-lg hover:bg-gray-50 active:bg-gray-100 items-center"
                                 v-for="e in datas.sub_topic_4.data"
                                 :key="e.id"
                             >
-                                <span
-                                    :class="[
-                                        datas.sub_topic_4.value == e.sub_topic_4
-                                            ? 'text-blue-500'
-                                            : '',
-                                    ]"
-                                >
+                                <span>
                                     {{ e.sub_topic_4 }}
                                 </span>
+                                <Link
+                                    class="text-gray-300"
+                                    :href="
+                                        route('document.heading.show', {
+                                            keyword: e.sub_topic_4,
+                                        })
+                                    "
+                                    ><svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="1.5"
+                                        stroke="currentColor"
+                                        class="w-6 h-6"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                                        />
+                                    </svg>
+                                </Link>
                             </div>
                         </div>
 

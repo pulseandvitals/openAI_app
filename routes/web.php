@@ -8,6 +8,7 @@ use Illuminate\Foundation\Application;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\GeneratorController;
+use App\Http\Controllers\HeadingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Console\GeneratorCommand;
 
@@ -71,6 +72,10 @@ Route::middleware('auth')->prefix('document')->name('document.')->group(function
     Route::delete('/{document}',[DocumentController::class,'destroy'])->name('destroy');
     Route::get('/show/{parent}/{child}/{document}',[DocumentController::class,'show'])->name('show');
     Route::patch('/update/{keyword}',[DocumentController::class,'update'])->name('update');
+
+    Route::prefix('heading')->name('heading.')->group(function () {
+        Route::get('/{keyword}', [HeadingController::class,'show'])->name('show');
+    });
 
     Route::prefix('article')->name('article.')->group(function () {
         Route::post('/generate-article/{keywords}', [ArticleController::class,'generateArticle'])->name('generate-article');
