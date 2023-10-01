@@ -1,5 +1,6 @@
 <script setup>
 import { Head, Link, useForm } from "@inertiajs/vue3";
+import Badge from "@/Components/Badge.vue";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 </script>
 
@@ -226,7 +227,25 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
             </ul>
             <div class="static">
                 <div class="absolute bottom-2 left-0 px-6">
-                    <p>Name here. (Incomplete)</p>
+                    <div class="flex justify-between items-center">
+                        <img
+                            class="w-10 h-10 rounded-full mr-2"
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/256px-Default_pfp.svg.png"
+                            alt="Rounded avatar"
+                        />
+                        <div>
+                            <p class="font-bold text-gray-400 text-sm">
+                                {{ $page.props.auth.user.name }}
+                            </p>
+                            <Badge
+                                :status="
+                                    $page.props.auth.user.role == 1
+                                        ? 'Admin'
+                                        : 'User'
+                                "
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
