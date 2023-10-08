@@ -1,16 +1,17 @@
 <?php
 
-use App\Http\Controllers\ArticleController;
-use App\Http\Controllers\DocumentController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\WebsiteController;
-use App\Http\Controllers\GeneratorController;
-use App\Http\Controllers\HeadingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Console\GeneratorCommand;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\HeadingController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WebsiteController;
+use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\GeneratorController;
+use App\Http\Controllers\ContentBriefController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +76,10 @@ Route::middleware('auth')->prefix('document')->name('document.')->group(function
 
     Route::prefix('heading')->name('heading.')->group(function () {
         Route::get('/{keyword}', [HeadingController::class,'show'])->name('show');
+    });
+
+    Route::prefix('content-brief')->name('content-brief.')->group(function () {
+        Route::get('/content-brief',[ContentBriefController::class,'create'])->name('create');
     });
 
     Route::prefix('article')->name('article.')->group(function () {

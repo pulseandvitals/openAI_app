@@ -19,6 +19,7 @@
     },
     "dependencies": {
         "@tinymce/tinymce-vue": "^4.0.7",
-        "notiwind": "^2.0.2"
+        "notiwind": "^2.0.2",
+        "tw-elements": "^1.0.0"
     }
 }

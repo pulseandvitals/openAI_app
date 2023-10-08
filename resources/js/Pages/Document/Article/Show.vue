@@ -124,6 +124,7 @@ const generateSingleArticle = (article) => {
                                 <div class="px-2 py-3">
                                     <TextAreaEditor
                                         class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                        v-model="form.prompt"
                                     />
                                     <span class="text-gray-300 text-xs">
                                         Please note that this section generates
@@ -235,7 +236,6 @@ const generateSingleArticle = (article) => {
                                 <InputLabel for="entities" value="Entities" />
                                 <TextAreaEditor
                                     class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                                    v-model="form.prompt"
                                 />
                             </div>
                         </div>

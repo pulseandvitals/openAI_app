@@ -8,7 +8,7 @@ const props = defineProps({
     <editor
         api-key="k9n2673bajx9jmu82ecivkz5hec6yvtt82h17axug3nl3fw7"
         :init="{
-            height: 500,
+            height: 800,
             menubar: false,
             plugins: [
                 'advlist autolink lists link image charmap print preview anchor',

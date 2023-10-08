@@ -44,7 +44,6 @@ class GenerateDocumentService {
             ->get();
 
         $sub_topic_4 = File::query()
-            ->where('sub_topic_4','!=',$child)
             ->where([
                 'document_id' => $params['id'],
                 'sub_topic_3' => $child,
