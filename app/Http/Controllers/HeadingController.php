@@ -23,4 +23,11 @@ class HeadingController extends Controller
             ]
         ]);
     }
+    public function extractJson(Request $request)
+    {
+        $file = $request->url;
+        $content = file_get_contents($file);
+        $json = json_decode($content, true);
+        dd($json);
+    }
 }

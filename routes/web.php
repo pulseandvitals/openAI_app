@@ -76,6 +76,7 @@ Route::middleware('auth')->prefix('document')->name('document.')->group(function
 
     Route::prefix('heading')->name('heading.')->group(function () {
         Route::get('/{keyword}', [HeadingController::class,'show'])->name('show');
+        Route::post('/extract-json-file',[HeadingController::class,'extractJson'])->name('extract-json-file');
     });
 
     Route::prefix('content-brief')->name('content-brief.')->group(function () {
