@@ -300,8 +300,8 @@ const generateArticle = (keywords) => {
                         <div class="font-bold">
                             <div
                                 class="p-4 self-start mt-2 text-gray-400 rounded-lg flex justify-between"
-                                v-for="e in datas.keywords.data"
-                                :key="e.id"
+                                v-for="data in SERP_Data"
+                                :key="data.id"
                                 :class="[
                                     e.is_article_completed
                                         ? 'bg-green-200 text-green-500'

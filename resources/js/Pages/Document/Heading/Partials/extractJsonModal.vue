@@ -6,6 +6,9 @@ import { Head, Link, useForm } from "@inertiajs/vue3";
 import { nextTick, ref } from "vue";
 import InputError from "@/Components/InputError.vue";
 
+let props = defineProps({
+    keyword: String,
+});
 let form = useForm({
     url: "",
 });
@@ -29,7 +32,11 @@ const extractJson = () => {
             class="mt-6 space-y-6"
             enctype="multipart/form-data"
             @submit.prevent="
-                form.post(route('document.heading.extract-json-file'))
+                form.post(
+                    route('document.heading.extract-json-file', {
+                        keyword: keyword,
+                    })
+                )
             "
         >
             <div class="p-6 px-6">

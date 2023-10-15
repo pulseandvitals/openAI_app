@@ -12,8 +12,13 @@ import { nextTick, ref } from "vue";
         aria-label="Sidebar"
     >
         <div class="h-full px-3 py-4 overflow-y-auto bg-white shadow-sm">
-            <div class="mb-5">
-                <span class="font-bold"> Selected Headings </span>
+            <div class="">
+                <div class="mb-5">
+                    <span class="font-bold"> Selected Headings </span>
+                </div>
+                <div class="text-gray-500 font-medium hover:text-gray-800 mb-5">
+                    <Link> Generate AI outline </Link>
+                </div>
             </div>
             <div class="bg-white mb-3 rounded-lg self-start">
                 <div
