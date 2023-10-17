@@ -5,14 +5,22 @@ import { Head, Link, useForm } from "@inertiajs/vue3";
 import SelectedHeading from "./Partials/SelectedHeading.vue";
 import extractJsonModal from "./Partials/extractJsonModal.vue";
 import TextInput from "@/Components/TextInput.vue";
+import { nextTick, ref } from "vue";
+import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 let props = defineProps({
     heading: Object,
     extractedData: Object,
 });
+let selectedLabels = ref([]);
 let form = useForm({
     header: props.heading.keyword,
+    selectedHead: selectedLabels,
 });
+const select = (b) => {
+    form.selectedHead = b;
+    alert(form.selectedHead);
+};
 </script>
 
 <template>
@@ -25,7 +33,7 @@ let form = useForm({
         </template>
 
         <Success />
-        <SelectedHeading />
+        <SelectedHeading :selectedHeading="form.selectedHead" />
 
         <div class="py-6">
             <div class="max-w-8xl mr-80 mx-auto sm:px-6 lg:px-8">
@@ -56,8 +64,10 @@ let form = useForm({
                                     Back
                                 </Link>
                                 <span class="font-bold text-gray-400">
-                                    Selected Headings (4)</span
-                                >
+                                    Selected Headings ({{
+                                        form.selectedHead.length
+                                    }})
+                                </span>
                             </div>
                             <extractJsonModal :keyword="heading.keyword" />
                         </div>
@@ -129,7 +139,11 @@ let form = useForm({
                                         </p>
                                     </div>
                                     <div class="text-gray-500">
-                                        <Link>Add</Link>
+                                        <input
+                                            type="checkbox"
+                                            :value="b.h1"
+                                            v-model="form.selectedHead"
+                                        />
                                     </div>
                                 </div>
                             </div>

@@ -29,12 +29,17 @@ class HeadingController extends Controller
     }
     public function extractJson(Request $request,$keyword)
     {
+        $request->validate([
+            'url' => 'required|mimes:json'
+        ]);
+
         $file = $request->url;
         $content = file_get_contents($file);
         $json = json_decode($content, true);
         $getFirstId = File::where('sub_topic_4',$keyword)->first();
         $heading = File::find($getFirstId->id);
         $data = collect($json['SERP_Data']);
+
         return Inertia::render('Document/Heading/Show', [
             'heading' => [
                 'keyword' => Str::ucfirst($heading->sub_topic_4)

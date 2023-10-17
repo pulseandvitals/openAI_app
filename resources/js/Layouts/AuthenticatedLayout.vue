@@ -6,8 +6,6 @@ import Footer from "@/Components/Partials/Footer.vue";
 
 <template>
     <div>
-        <Nav />
-
         <div class="min-h-screen bg-gray-100">
             <Side />
             <!-- Page Content -->
