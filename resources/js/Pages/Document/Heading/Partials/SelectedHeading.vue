@@ -1,14 +1,33 @@
 <script setup>
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import SecondaryButton from "@/Components/SecondaryButton.vue";
-import ModalRight from "@/Components/ModalRight.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 import { nextTick, ref } from "vue";
 
 let props = defineProps({
     selectedHeading: Array,
+    heading: Object,
 });
+let form = useForm({
+    manualInputHeadingType: "",
+    manualInputHeadingTitle: "",
+});
+let saveManualInput = () => {
+    let data = {
+        header_type: form.manualInputHeadingType,
+        header_title: form.manualInputHeadingTitle,
+    };
+    props.selectedHeading = props.selectedHeading.push(data);
+    (form.manualInputHeadingTitle = ""), (form.manualInputHeadingType = "");
+};
+let submit = () => {
+    form.post(
+        route("document.heading.store", {
+            heading: props.heading,
+            selected: JSON.stringify(props.selectedHeading),
+        })
+    );
+};
 </script>
 <template>
     <aside
@@ -21,6 +40,7 @@ let props = defineProps({
                 <div class="mb-5">
                     <span class="font-bold"> Selected Headings </span>
                 </div>
+
                 <div
                     class="text-gray-500 font-medium hover:text-gray-800 mb-5 flex justify-between"
                 >
@@ -45,15 +65,57 @@ let props = defineProps({
                 :key="selected.id"
             >
                 <div
-                    class="bg-gray-100 border-l-4 border-orange-500 text-gray-500 p-4 mb-2 rounded-lg flex justify-between items-center"
+                    class="bg-gray-100 text-gray-500 p-4 mb-2 rounded-lg flex justify-between items-center"
+                    :class="[
+                        selected.header_type == 'h1'
+                            ? 'border-l-4 border-orange-500'
+                            : '',
+                        selected.header_type == 'h2'
+                            ? 'border-l-4 border-blue-500'
+                            : '',
+                        selected.header_type == 'h3'
+                            ? 'border-l-4 border-purple-500'
+                            : '',
+                        selected.header_type == 'h4'
+                            ? 'border-l-4 border-green-500'
+                            : '',
+                        selected.header_type == 'h5'
+                            ? 'border-l-4 border-red-500'
+                            : '',
+                        selected.header_type == 'h6'
+                            ? 'border-l-4 border-yellow-500'
+                            : '',
+                    ]"
                 >
                     <div class="flex items-center">
                         <p
-                            class="bg-orange-100 text-xs font-medium mr-2 px-2.5 rounded dark:text-orange-400 border border-orange-400"
+                            class="text-xs font-medium mr-2 px-2.5 rounded uppercase"
+                            :class="[
+                                selected.header_type == 'h1'
+                                    ? 'dark:text-orange-400 border border-orange-400'
+                                    : '',
+                                selected.header_type == 'h2'
+                                    ? 'dark:text-blue-400 border border-blue-400'
+                                    : '',
+                                selected.header_type == 'h3'
+                                    ? 'dark:text-purple-400 border border-purple-400'
+                                    : '',
+                                selected.header_type == 'h4'
+                                    ? 'dark:text-green-400 border border-green-400'
+                                    : '',
+                                selected.header_type == 'h5'
+                                    ? 'dark:text-red-400 border border-red-400'
+                                    : '',
+                                selected.header_type == 'h6'
+                                    ? 'dark:text-yellow-400 border border-yellow-400'
+                                    : '',
+                            ]"
                         >
-                            H2
+                            {{ selected.header_type }}
                         </p>
-                        <span class="font-medium"> {{ selected }}</span>
+                        <span class="text-xs">
+                            {{ selected.header_title }}</span
+                        >
                     </div>
 
                     <div class="text-gray-500 flex items-center">
@@ -83,7 +145,11 @@ let props = defineProps({
             </div>
 
             <div class="flex justify-between items-center">
-                <select id="small" class="rounded mr-2 border border-gray-300">
+                <select
+                    id="small"
+                    class="rounded mr-2 border border-gray-300"
+                    v-model="form.manualInputHeadingType"
+                >
                     <option selected></option>
                     <option value="h1">H1</option>
                     <option value="h2">H2</option>
@@ -95,10 +161,12 @@ let props = defineProps({
                 <TextInput
                     type="text"
                     class="w-full mr-2 rounded border-gray-200"
+                    v-model="form.manualInputHeadingTitle"
                 >
                 </TextInput>
-                <Link
+                <PrimaryButton
                     class="bg-white hover:bg-gray-200 active:bg-gray-800 border-0"
+                    @click="saveManualInput()"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -114,16 +182,16 @@ let props = defineProps({
                             d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
                         />
                     </svg>
-                </Link>
+                </PrimaryButton>
             </div>
 
             <div class="flex justify-center">
-                <Link
-                    :href="route('document.content-brief.create')"
+                <PrimaryButton
                     class="absolute bottom-2 px-4 inline-flex items-center py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-600 focus:bg-blue-700 active:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                    @click="submit"
                 >
                     Proceed to Content Brief
-                </Link>
+                </PrimaryButton>
             </div>
         </div>
     </aside>

@@ -17,10 +17,6 @@ let form = useForm({
     header: props.heading.keyword,
     selectedHead: selectedLabels,
 });
-const select = (b) => {
-    form.selectedHead = b;
-    alert(form.selectedHead);
-};
 </script>
 
 <template>
@@ -33,7 +29,11 @@ const select = (b) => {
         </template>
 
         <Success />
-        <SelectedHeading :selectedHeading="form.selectedHead" />
+
+        <SelectedHeading
+            :selectedHeading="form.selectedHead"
+            :heading="heading"
+        />
 
         <div class="py-6">
             <div class="max-w-8xl mr-80 mx-auto sm:px-6 lg:px-8">
@@ -95,7 +95,6 @@ const select = (b) => {
                                         <input
                                             id="default-checkbox"
                                             type="checkbox"
-                                            value=""
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2"
                                         />
                                         <label
@@ -114,34 +113,65 @@ const select = (b) => {
 
                             <div v-for="c in e.contents" :key="c.id">
                                 <div
-                                    class="bg-gray-100 border-l-4 border-orange-500 text-gray-500 p-4 mb-2 rounded-lg flex justify-between items-center"
+                                    class="bg-gray-100 border-l-4 border-orange-500 text-gray-500 p-4 mb-2 rounded-lg flex justify-between items-center hover:bg-gray-200"
                                     v-for="b in e.contents.article_outline"
                                     :key="b.id"
+                                    :class="[
+                                        b.header_type == 'h1'
+                                            ? 'border-l-4 border-orange-500'
+                                            : '',
+                                        b.header_type == 'h2'
+                                            ? 'border-l-4 border-blue-500'
+                                            : '',
+                                        b.header_type == 'h3'
+                                            ? 'border-l-4 border-purple-500'
+                                            : '',
+                                        b.header_type == 'h4'
+                                            ? 'border-l-4 border-green-500'
+                                            : '',
+                                        b.header_type == 'h5'
+                                            ? 'border-l-4 border-red-500'
+                                            : '',
+                                        b.header_type == 'h6'
+                                            ? 'border-l-4 border-yellow-500'
+                                            : '',
+                                    ]"
                                 >
-                                    <div>
-                                        <p class="font-bold">
-                                            {{ b.h1 }}
+                                    <div class="flex items-center">
+                                        <p
+                                            class="uppercase font-bold mr-2 text-xs px-2.5 rounded"
+                                            :class="[
+                                                b.header_type == 'h1'
+                                                    ? 'dark:text-orange-400 border border-orange-400'
+                                                    : '',
+                                                b.header_type == 'h2'
+                                                    ? 'dark:text-blue-400 border border-blue-400'
+                                                    : '',
+                                                b.header_type == 'h3'
+                                                    ? 'dark:text-purple-400 border border-purple-400'
+                                                    : '',
+                                                b.header_type == 'h4'
+                                                    ? 'dark:text-green-400 border border-green-400'
+                                                    : '',
+                                                b.header_type == 'h5'
+                                                    ? 'dark:text-red-400 border border-red-400'
+                                                    : '',
+                                                b.header_type == 'h6'
+                                                    ? 'dark:text-yellow-400 border border-yellow-400'
+                                                    : '',
+                                            ]"
+                                        >
+                                            {{ b.header_type }}
                                         </p>
-                                        <p class="font-bold">
-                                            {{ b.h2 }}
-                                        </p>
-                                        <p class="font-bold">
-                                            {{ b.h3 }}
-                                        </p>
-                                        <p class="font-bold">
-                                            {{ b.h4 }}
-                                        </p>
-                                        <p class="font-bold">
-                                            {{ b.h5 }}
-                                        </p>
-                                        <p class="font-bold">
-                                            {{ b.h6 }}
+                                        <p class="font-xs">
+                                            {{ b.header_title }}
                                         </p>
                                     </div>
-                                    <div class="text-gray-500">
+                                    <div class="text-gray-700">
                                         <input
                                             type="checkbox"
-                                            :value="b.h1"
+                                            class="border-gray-300 rounded-lg text-green-600"
+                                            :value="b"
                                             v-model="form.selectedHead"
                                         />
                                     </div>

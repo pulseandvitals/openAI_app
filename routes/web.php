@@ -77,10 +77,11 @@ Route::middleware('auth')->prefix('document')->name('document.')->group(function
     Route::prefix('heading')->name('heading.')->group(function () {
         Route::get('/{keyword}', [HeadingController::class,'show'])->name('show');
         Route::post('/extract-json-file/{keyword}',[HeadingController::class,'extractJson'])->name('extract-json-file');
+        Route::post('/store/{heading}/{selected}', [HeadingController::class,'store'])->name('store');
     });
 
     Route::prefix('content-brief')->name('content-brief.')->group(function () {
-        Route::get('/content-brief',[ContentBriefController::class,'create'])->name('create');
+        Route::get('/content-brief/{heading}',[ContentBriefController::class,'create'])->name('create');
     });
 
     Route::prefix('article')->name('article.')->group(function () {

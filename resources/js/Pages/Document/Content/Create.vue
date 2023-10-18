@@ -3,8 +3,17 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import Success from "@/Components/Alert/Success.vue";
 import TextAreaEditor from "@/Components/TextAreaEditor.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
+
+const props = defineProps({
+    selectedHeadings: Array,
+    titleHeading: Object,
+});
+let form = useForm({
+    title: props.titleHeading,
+});
 </script>
 <template>
     <Head title="Content Brief" />
@@ -15,6 +24,9 @@ import { Head, Link, useForm } from "@inertiajs/vue3";
                 Content Brief
             </h2>
         </template>
+
+        <Success />
+
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="flex justify-between mb-2">
@@ -47,6 +59,7 @@ import { Head, Link, useForm } from "@inertiajs/vue3";
                             <div class="px-2 py-3">
                                 <TextAreaEditor
                                     class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                    v-model="form.title"
                                 />
                                 <span class="text-gray-300 text-xs">
                                     Please note that this section will finalize
@@ -70,102 +83,84 @@ import { Head, Link, useForm } from "@inertiajs/vue3";
                                 </Link>
                             </div>
                             <div
-                                class="bg-gray-100 border-l-4 border-orange-500 text-gray-500 p-4 mb-2 rounded-lg flex justify-between items-center"
+                                class="bg-white mb-3 rounded-lg self-start"
+                                v-for="selected in selectedHeadings"
+                                :key="selected.id"
                             >
-                                <div class="flex items-center">
-                                    <p
-                                        class="bg-orange-100 text-xs font-medium mr-2 px-2.5 rounded dark:text-orange-400 border border-orange-400"
-                                    >
-                                        H2
-                                    </p>
-                                    <span class="font-medium">
-                                        Sample heading text.
-                                    </span>
-                                </div>
-
-                                <div class="text-gray-500 flex items-center">
-                                    <Link
-                                        ><svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke-width="1.5"
-                                            stroke="currentColor"
-                                            class="w-6 h-6"
+                                <div
+                                    class="bg-gray-100 text-gray-500 p-4 mb-2 rounded-lg flex justify-between items-center"
+                                    :class="[
+                                        selected.heading_type == 'h1'
+                                            ? 'border-l-4 border-orange-500'
+                                            : '',
+                                        selected.heading_type == 'h2'
+                                            ? 'border-l-4 border-blue-500'
+                                            : '',
+                                        selected.heading_type == 'h3'
+                                            ? 'border-l-4 border-purple-500'
+                                            : '',
+                                        selected.heading_type == 'h4'
+                                            ? 'border-l-4 border-green-500'
+                                            : '',
+                                        selected.heading_type == 'h5'
+                                            ? 'border-l-4 border-red-500'
+                                            : '',
+                                        selected.heading_type == 'h6'
+                                            ? 'border-l-4 border-yellow-500'
+                                            : '',
+                                    ]"
+                                >
+                                    <div class="flex items-center">
+                                        <p
+                                            class="text-xs font-medium mr-2 px-2.5 rounded uppercase"
+                                            :class="[
+                                                selected.heading_type == 'h1'
+                                                    ? 'dark:text-orange-400 border border-orange-400'
+                                                    : '',
+                                                selected.heading_type == 'h2'
+                                                    ? 'dark:text-blue-400 border border-blue-400'
+                                                    : '',
+                                                selected.heading_type == 'h3'
+                                                    ? 'dark:text-purple-400 border border-purple-400'
+                                                    : '',
+                                                selected.heading_type == 'h4'
+                                                    ? 'dark:text-green-400 border border-green-400'
+                                                    : '',
+                                                selected.heading_type == 'h5'
+                                                    ? 'dark:text-red-400 border border-red-400'
+                                                    : '',
+                                                selected.heading_type == 'h6'
+                                                    ? 'dark:text-yellow-400 border border-yellow-400'
+                                                    : '',
+                                            ]"
                                         >
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                                            />
-                                        </svg>
-                                    </Link>
-                                </div>
-                            </div>
-                            <div
-                                class="bg-gray-100 border-l-4 border-orange-500 text-gray-500 p-4 mb-2 rounded-lg flex justify-between items-center"
-                            >
-                                <div class="flex items-center">
-                                    <p
-                                        class="bg-orange-100 text-xs font-medium mr-2 px-2.5 rounded dark:text-orange-400 border border-orange-400"
-                                    >
-                                        H2
-                                    </p>
-                                    <span class="font-medium">
-                                        Sample heading text.
-                                    </span>
-                                </div>
-
-                                <div class="text-gray-500 flex items-center">
-                                    <Link
-                                        ><svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke-width="1.5"
-                                            stroke="currentColor"
-                                            class="w-6 h-6"
+                                            {{ selected.heading_type }}
+                                        </p>
+                                        <span class="text-xs">
+                                            {{ selected.heading_title }}</span
                                         >
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                                            />
-                                        </svg>
-                                    </Link>
-                                </div>
-                            </div>
-                            <div
-                                class="bg-gray-100 border-l-4 border-orange-500 text-gray-500 p-4 mb-2 rounded-lg flex justify-between items-center"
-                            >
-                                <div class="flex items-center">
-                                    <p
-                                        class="bg-orange-100 text-xs font-medium mr-2 px-2.5 rounded dark:text-orange-400 border border-orange-400"
-                                    >
-                                        H2
-                                    </p>
-                                    <span class="font-medium">
-                                        Sample heading text.
-                                    </span>
-                                </div>
+                                    </div>
 
-                                <div class="text-gray-500 flex items-center">
-                                    <Link
-                                        ><svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke-width="1.5"
-                                            stroke="currentColor"
-                                            class="w-6 h-6"
-                                        >
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                                            />
-                                        </svg>
-                                    </Link>
+                                    <div
+                                        class="text-gray-500 flex items-center"
+                                    >
+                                        <Link
+                                            ><svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke-width="1.5"
+                                                stroke="currentColor"
+                                                class="w-6 h-6"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                                />
+                                            </svg>
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
                         </div>
