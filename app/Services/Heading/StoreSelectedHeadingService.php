@@ -15,7 +15,9 @@ class StoreSelectedHeadingService {
                 'heading_id' => $heading,
                 'heading_title' => $selected['header_title'],
                 'heading_type' => $selected['header_type'],
+                'html_format' => '<'.$selected['header_type'].'>'.$selected['header_title'].'</'.$selected['header_type'].'>',
                 'is_started' => 1,
+                'position_order' => $key
             ]);
         }
     return $data;

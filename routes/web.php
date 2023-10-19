@@ -81,7 +81,7 @@ Route::middleware('auth')->prefix('document')->name('document.')->group(function
     });
 
     Route::prefix('content-brief')->name('content-brief.')->group(function () {
-        Route::get('/content-brief/{heading}',[ContentBriefController::class,'create'])->name('create');
+        Route::get('/create/{heading}',[ContentBriefController::class,'create'])->name('create');
     });
 
     Route::prefix('article')->name('article.')->group(function () {

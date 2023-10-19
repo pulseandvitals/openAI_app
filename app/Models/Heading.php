@@ -18,5 +18,7 @@ class Heading extends Model
         'heading_type',
         'is_completed',
         'is_started',
+        'position_order',
+        'html_format'
     ];
 }

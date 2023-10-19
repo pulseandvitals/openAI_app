@@ -16,13 +16,19 @@ class ContentBriefController extends Controller
                'user_id' => auth()->id(),
                'heading_id' => $heading
             ])
+            ->orderBy('position_order')
             ->get();
+
          $title = File::query()
-               ->where('id',$heading)
-               ->first();
+            ->where('id',$heading)
+            ->first();
+
+         $collection = collect($headings);
+         $data = $collection->implode('html_format', '<br>');
 
          return Inertia::render('Document/Content/Create',[
             'selectedHeadings' => $headings,
+            'editableHeadings' => $data,
             'titleHeading' => '<h1>'.Str::title($title->sub_topic_4).'</h1>'
         ]);
      }

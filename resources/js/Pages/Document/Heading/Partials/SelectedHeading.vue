@@ -3,6 +3,7 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 import { nextTick, ref } from "vue";
+import Success from "@/Components/Alert/Success.vue";
 
 let props = defineProps({
     selectedHeading: Array,
@@ -25,6 +26,7 @@ let submit = () => {
         route("document.heading.store", {
             heading: props.heading,
             selected: JSON.stringify(props.selectedHeading),
+            preserveScroll: true,
         })
     );
 };
@@ -37,8 +39,32 @@ let submit = () => {
     >
         <div class="h-full px-3 py-4 overflow-y-auto bg-white shadow-sm">
             <div class="">
-                <div class="mb-5">
-                    <span class="font-bold"> Selected Headings </span>
+                <div class="mb-5 flex justify-between items-center">
+                    <div>
+                        <span class="font-bold"> Selected Headings </span>
+                    </div>
+                    <div>
+                        <PrimaryButton
+                            @click.prevent="submit"
+                            :class="{ 'opacity-25': form.processing }"
+                            :disabled="form.processing"
+                        >
+                            Save
+                        </PrimaryButton>
+                        <Transition
+                            enter-active-class="transition ease-in-out"
+                            enter-from-class="opacity-0"
+                            leave-active-class="transition ease-in-out"
+                            leave-to-class="opacity-0"
+                        >
+                            <p
+                                v-if="form.recentlySuccessful"
+                                class="text-sm text-gray-600"
+                            >
+                                Saved.
+                            </p>
+                        </Transition>
+                    </div>
                 </div>
 
                 <div
@@ -186,12 +212,12 @@ let submit = () => {
             </div>
 
             <div class="flex justify-center">
-                <PrimaryButton
+                <Link
+                    :href="route('document.content-brief.create', heading)"
                     class="absolute bottom-2 px-4 inline-flex items-center py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-600 focus:bg-blue-700 active:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
-                    @click="submit"
                 >
                     Proceed to Content Brief
-                </PrimaryButton>
+                </Link>
             </div>
         </div>
     </aside>

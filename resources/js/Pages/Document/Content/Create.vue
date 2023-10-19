@@ -1,19 +1,24 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import InputError from "@/Components/InputError.vue";
-import InputLabel from "@/Components/InputLabel.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
 import Success from "@/Components/Alert/Success.vue";
+import { nextTick, ref } from "vue";
 import TextAreaEditor from "@/Components/TextAreaEditor.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 
 const props = defineProps({
     selectedHeadings: Array,
     titleHeading: Object,
+    editableHeadings: String,
 });
 let form = useForm({
+    selected: props.editableHeadings,
     title: props.titleHeading,
 });
+let paste = (selected) => {
+    let data = JSON.stringify(selected);
+
+    alert(data);
+};
 </script>
 <template>
     <Head title="Content Brief" />
@@ -26,7 +31,6 @@ let form = useForm({
         </template>
 
         <Success />
-
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="flex justify-between mb-2">
@@ -59,8 +63,9 @@ let form = useForm({
                             <div class="px-2 py-3">
                                 <TextAreaEditor
                                     class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                                    v-model="form.title"
-                                />
+                                    v-model="form.selected"
+                                >
+                                </TextAreaEditor>
                                 <span class="text-gray-300 text-xs">
                                     Please note that this section will finalize
                                     all of the headings and informations for
@@ -78,14 +83,17 @@ let form = useForm({
                                 <span class="font-bold text-gray-600">
                                     Selected headings
                                 </span>
-                                <Link class="font-medium text-gray-400">
+                                <Link
+                                    @click="paste(selectedHeadings)"
+                                    class="font-medium text-gray-400"
+                                >
                                     Paste
                                 </Link>
                             </div>
                             <div
                                 class="bg-white mb-3 rounded-lg self-start"
                                 v-for="selected in selectedHeadings"
-                                :key="selected.id"
+                                :key="selected.position_order"
                             >
                                 <div
                                     class="bg-gray-100 text-gray-500 p-4 mb-2 rounded-lg flex justify-between items-center"

@@ -12,16 +12,23 @@ use Illuminate\Http\Request;
 class HeadingController extends Controller
 {
 
-    public function show(Request $request,$keyword)
+    public function show($keyword)
     {
+        $content = file_get_contents(public_path('/temp_data/output2.json'));
+        if(!empty($content)) {
+            $json = json_decode($content, true);
+            $data = collect($json['SERP_Data']);
+            $getFirstId = File::where('sub_topic_4',$keyword)->first();
+            $heading = File::find($getFirstId->id);
+        }
         $getFirstId = File::where('sub_topic_4',$keyword)->first();
         $heading = File::find($getFirstId->id);
 
         return Inertia::render('Document/Heading/Show', [
             'heading' => $heading,
             'extractedData' => [
-                'query' =>  null,
-                'serps' =>  null,
+                'query' =>  $data['Query'] ?? null,
+                'serps' =>  $data ?? null,
             ]
         ]);
     }
@@ -30,20 +37,10 @@ class HeadingController extends Controller
         $request->validate([
             'url' => 'required|mimes:json'
         ]);
-        $getFirstId = File::where('sub_topic_4',$keyword)->first();
-        $heading = File::find($getFirstId->id);
-        $file = $request->url;
-        $content = file_get_contents($file);
-        $json = json_decode($content, true);
-        $data = collect($json['SERP_Data']);
+        $originalName = $request->url->getClientOriginalExtension();
+        $request->image->move(public_path('temp_date'), $originalName);
 
-        return Inertia::render('Document/Heading/Show', [
-            'heading' => $heading,
-            'extractedData' => [
-                'query' => $json['Query'] ? $json['Query'] : null,
-                'serps' => $data ? $data : null,
-            ]
-        ]);
+        return redirect()->back()->with('message','Extracted temporary data.');
     }
 
     public function store($heading,$selected, StoreSelectedHeadingService $storeSelectedHeadingService)
@@ -51,9 +48,10 @@ class HeadingController extends Controller
         $selectedHeading = json_decode($selected,true);
         $storeSelectedHeadingService->execute($heading,$selectedHeading,auth()->id());
 
-        return redirect()->route('document.content-brief.create',$heading)->with([
-            'message' => 'Successfully generated the headings.',
-            'heading_id' => $heading
-        ]);
+        return redirect()->back()->with('message','Saved.');
+    }
+    public function redirectPage($weburl)
+    {
+        return redirect($weburl);
     }
 }
