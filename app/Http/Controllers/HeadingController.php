@@ -25,7 +25,10 @@ class HeadingController extends Controller
         $heading = File::find($getFirstId->id);
 
         return Inertia::render('Document/Heading/Show', [
-            'heading' => $heading,
+            'heading' => $heading = [
+                'id' => $heading->id,
+                'keyword' => $heading->keyword
+            ],
             'extractedData' => [
                 'query' =>  $data['Query'] ?? null,
                 'serps' =>  $data ?? null,
@@ -50,6 +53,14 @@ class HeadingController extends Controller
 
         return redirect()->back()->with('message','Saved.');
     }
+    public function storeButton($heading,$selected, StoreSelectedHeadingService $storeSelectedHeadingService)
+    {
+        $selectedHeading = json_decode($selected,true);
+        $storeSelectedHeadingService->execute($heading,$selectedHeading,auth()->id());
+
+        return redirect()->route('document.content-brief.create',$heading)->with('message','Saved.');
+    }
+
     public function redirectPage($weburl)
     {
         return redirect($weburl);

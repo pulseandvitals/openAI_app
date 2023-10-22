@@ -32,4 +32,10 @@ class ContentBriefController extends Controller
             'titleHeading' => '<h1>'.Str::title($title->sub_topic_4).'</h1>'
         ]);
      }
+
+     public function destroy($heading)
+     {
+       Heading::find($heading)->delete();
+       return redirect()->back()->with('message','Successfully deleted.');
+     }
 }

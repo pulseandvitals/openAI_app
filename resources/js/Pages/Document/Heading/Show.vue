@@ -13,6 +13,7 @@ let props = defineProps({
 let selectedLabels = ref([]);
 let form = useForm({
     header: props.heading.keyword,
+    header_id: props.heading.id,
     selectedHead: selectedLabels,
 });
 </script>
@@ -61,11 +62,6 @@ let form = useForm({
 
                                     Back
                                 </Link>
-                                <span class="font-bold text-gray-400">
-                                    Selected Headings ({{
-                                        form.selectedHead.length
-                                    }})
-                                </span>
                             </div>
                             <extractJsonModal :keyword="heading.keyword" />
                         </div>
@@ -81,9 +77,18 @@ let form = useForm({
                     >
                         <div class="px-6 py-4 w-full">
                             <div class="flex justify-between">
-                                <div></div>
+                                <div>
+                                    <a
+                                        :href="e.url"
+                                        target="_blank"
+                                        class="text-gray-500 font-bold"
+                                        >Go to site</a
+                                    >
+                                </div>
                                 <div class="">
-                                    <div class="flex items-center mb-4">
+                                    <div
+                                        class="flex items-center mb-4 justify-between"
+                                    >
                                         <input
                                             id="default-checkbox"
                                             type="checkbox"
@@ -97,13 +102,6 @@ let form = useForm({
                                     </div>
                                 </div>
                             </div>
-
-                            <a
-                                :href="e.url"
-                                target="_blank"
-                                class="text-gray-500 text-xs"
-                                >{{ e.url }}</a
-                            >
 
                             <div
                                 class="bg-gray-100 text-gray-500 p-4 mb-2 rounded-lg flex justify-between items-center hover:bg-gray-200"
@@ -132,9 +130,6 @@ let form = useForm({
                                     <p
                                         class="uppercase font-bold mr-2 text-xs px-2.5 rounded"
                                         :class="[
-                                            b.header_type == 'h1'
-                                                ? 'dark:text-orange-400 border border-orange-400'
-                                                : '',
                                             b.header_type == 'h2'
                                                 ? 'dark:text-blue-400 border border-blue-400'
                                                 : '',
@@ -155,7 +150,7 @@ let form = useForm({
                                         {{
                                             b.header_type != "h1"
                                                 ? b.header_type
-                                                : "title"
+                                                : ""
                                         }}
                                     </p>
                                     <p

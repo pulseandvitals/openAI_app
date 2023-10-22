@@ -2,7 +2,6 @@
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
-import { nextTick, ref } from "vue";
 import Success from "@/Components/Alert/Success.vue";
 
 let props = defineProps({
@@ -30,6 +29,15 @@ let submit = () => {
         })
     );
 };
+let submitButton = () => {
+    form.post(
+        route("document.heading.store-button", {
+            heading: props.heading,
+            selected: JSON.stringify(props.selectedHeading),
+            preserveScroll: true,
+        })
+    );
+};
 </script>
 <template>
     <aside
@@ -41,7 +49,9 @@ let submit = () => {
             <div class="">
                 <div class="mb-5 flex justify-between items-center">
                     <div>
-                        <span class="font-bold"> Selected Headings </span>
+                        <span class="font-bold">
+                            Search results ({{ selectedHeading.length }})
+                        </span>
                     </div>
                     <div>
                         <PrimaryButton
@@ -86,7 +96,7 @@ let submit = () => {
                 class="w-48 h-1 mx-auto my-4 bg-gray-100 border-0 rounded dark:bg-gray-300"
             />
             <div
-                class="bg-white mb-3 rounded-lg self-start"
+                class="bg-white mb-3 rounded-lg"
                 v-for="selected in selectedHeading"
                 :key="selected.id"
             >
@@ -212,12 +222,12 @@ let submit = () => {
             </div>
 
             <div class="flex justify-center">
-                <Link
-                    :href="route('document.content-brief.create', heading)"
-                    class="absolute bottom-2 px-4 inline-flex items-center py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-600 focus:bg-blue-700 active:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                <PrimaryButton
+                    @click.prevent="submitButton"
+                    class="absolute bottom-2 px-4 items-center py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase hover:bg-blue-600 focus:bg-blue-700 active:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                     Proceed to Content Brief
-                </Link>
+                </PrimaryButton>
             </div>
         </div>
     </aside>

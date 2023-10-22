@@ -78,10 +78,12 @@ Route::middleware('auth')->prefix('document')->name('document.')->group(function
         Route::get('/{keyword}', [HeadingController::class,'show'])->name('show');
         Route::post('/extract-json-file/{keyword}',[HeadingController::class,'extractJson'])->name('extract-json-file');
         Route::post('/store/{heading}/{selected}', [HeadingController::class,'store'])->name('store');
+        Route::post('/store-button/{heading}/{selected}', [HeadingController::class,'storeButton'])->name('store-button');
     });
 
     Route::prefix('content-brief')->name('content-brief.')->group(function () {
         Route::get('/create/{heading}',[ContentBriefController::class,'create'])->name('create');
+        Route::delete('/destroy/{heading}',[ContentBriefController::class,'destroy'])->name('destroy');
     });
 
     Route::prefix('article')->name('article.')->group(function () {
