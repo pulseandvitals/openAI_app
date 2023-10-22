@@ -82,6 +82,8 @@ let submitButton = () => {
                 >
                     <button
                         class="bg-white text-gray-700 hover:bg-gray-200 active:bg-gray-400 border-solid border-2 border-gray-300 py-2 px-2 rounded-lg"
+                        :class="{ 'opacity-25': selectedHeading.length <= 5 }"
+                        :disabled="selectedHeading.length <= 5"
                     >
                         Generate AI outline
                     </button>

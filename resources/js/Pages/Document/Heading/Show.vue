@@ -15,6 +15,7 @@ let form = useForm({
     header: props.heading.keyword,
     header_id: props.heading.id,
     selectedHead: selectedLabels,
+    selectAllData: selectedLabels,
 });
 </script>
 
@@ -90,8 +91,9 @@ let form = useForm({
                                         class="flex items-center mb-4 justify-between"
                                     >
                                         <input
-                                            id="default-checkbox"
                                             type="checkbox"
+                                            v-model="form.selectAllData"
+                                            :value="e.contents.article_outline"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2"
                                         />
                                         <label
