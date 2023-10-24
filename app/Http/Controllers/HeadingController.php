@@ -32,6 +32,7 @@ class HeadingController extends Controller
             'extractedData' => [
                 'query' =>  $data['Query'] ?? null,
                 'serps' =>  $data ?? null,
+                'serps_count' => count($data)
             ]
         ]);
     }

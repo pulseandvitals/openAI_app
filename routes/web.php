@@ -84,6 +84,9 @@ Route::middleware('auth')->prefix('document')->name('document.')->group(function
     Route::prefix('content-brief')->name('content-brief.')->group(function () {
         Route::get('/create/{heading}',[ContentBriefController::class,'create'])->name('create');
         Route::delete('/destroy/{heading}',[ContentBriefController::class,'destroy'])->name('destroy');
+        Route::patch('/update/{heading}', [ContentBriefController::class,'update'])->name('update');
+        Route::post('/store',[ContentBriefController::class,'store'])->name('store');
+        Route::delete('/destroy-info/{information}', [ContentBriefController::class,'destroyInformation'])->name('destroyInfo');
     });
 
     Route::prefix('article')->name('article.')->group(function () {

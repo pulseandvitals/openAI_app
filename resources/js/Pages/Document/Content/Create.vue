@@ -3,6 +3,8 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import Success from "@/Components/Alert/Success.vue";
 import { nextTick, ref } from "vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import EditContentModal from "./Partials/EditContentModal.vue";
+import AddInformationModal from "./Partials/AddInformationModal.vue";
 import TextAreaEditor from "@/Components/TextAreaEditor.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 
@@ -16,14 +18,22 @@ let form = useForm({
     title: props.titleHeading,
 });
 const destroy = (heading) => {
-    form.delete(
-        route("document.content-brief.destroy", {
-            heading: heading,
-            onBefore: () =>
-                confirm("Are you sure you want to delete this heading?"),
-            preserveScroll: true,
-        })
-    );
+    form.delete(route("document.content-brief.destroy", heading), {
+        heading: heading,
+        onBefore: () =>
+            confirm("Are you sure you want to delete this heading?"),
+        preserveScroll: true,
+        preserveScroll: false,
+    });
+};
+
+const destroyInfo = (information) => {
+    form.delete(route("document.content-brief.destroyInfo", information), {
+        onBefore: () =>
+            confirm("Are you sure you want to delete this information?"),
+        preserveScroll: true,
+        preserveScroll: false,
+    });
 };
 </script>
 <template>
@@ -137,6 +147,10 @@ const destroy = (heading) => {
                                 </div>
 
                                 <div class="text-gray-500 flex items-center">
+                                    <AddInformationModal
+                                        :headingData="selected"
+                                    />
+                                    <EditContentModal :headingData="selected" />
                                     <Link @click="destroy(selected)"
                                         ><svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -153,6 +167,42 @@ const destroy = (heading) => {
                                             />
                                         </svg>
                                     </Link>
+                                </div>
+                            </div>
+                            <span class="font-bold text-gray-500 text-xs"
+                                >Collapsable (INCOMPLETE)</span
+                            >
+                            <div
+                                class="bg-white mb-3 rounded-lg self-start"
+                                v-for="information in selected.informations"
+                                :key="information.id"
+                            >
+                                <div
+                                    class="ml-3 bg-gray-100 text-gray-500 p-2 rounded-lg flex justify-between items-center hover:bg-gray-200"
+                                >
+                                    <span class="text-xs text-gray-500">
+                                        {{ information.additional_information }}
+                                    </span>
+                                    <div class="flex items-center">
+                                        <Link
+                                            @click="destroyInfo(information)"
+                                            class="text-xs text-red-500"
+                                            ><svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke-width="1.5"
+                                                stroke="currentColor"
+                                                class="w-6 h-6"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M6 18L18 6M6 6l12 12"
+                                                />
+                                            </svg>
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
                         </div>

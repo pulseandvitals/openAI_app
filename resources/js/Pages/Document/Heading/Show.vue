@@ -16,6 +16,7 @@ let form = useForm({
     header_id: props.heading.id,
     selectedHead: selectedLabels,
     selectAllData: selectedLabels,
+    serachResultCount: props.extractedData,
 });
 </script>
 
@@ -63,6 +64,11 @@ let form = useForm({
 
                                     Back
                                 </Link>
+                                <span class="font-bold text-gray-300">
+                                    Search Results ({{
+                                        extractedData.serps_count
+                                    }})</span
+                                >
                             </div>
                             <extractJsonModal :keyword="heading.keyword" />
                         </div>

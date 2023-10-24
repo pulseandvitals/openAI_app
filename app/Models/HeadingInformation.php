@@ -6,7 +6,7 @@ use app\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Heading extends Model
+class HeadingInformation extends Model
 {
     use HasFactory;
     use HasUuid;
@@ -14,16 +14,11 @@ class Heading extends Model
     protected $fillable = [
         'user_id',
         'heading_id',
-        'heading_title',
-        'heading_type',
-        'is_completed',
-        'is_started',
-        'position_order',
-        'html_format'
+        'additional_information',
     ];
-
-    public function informations()
+    public function headings()
     {
-        return $this->hasMany(HeadingInformation::class);
+        return $this->hasMany(Heading::class,'heading_id');
     }
+
 }

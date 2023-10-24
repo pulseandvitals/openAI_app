@@ -50,7 +50,7 @@ let submitButton = () => {
                 <div class="mb-5 flex justify-between items-center">
                     <div>
                         <span class="font-bold">
-                            Search results ({{ selectedHeading.length }})
+                            Selected Headings ({{ selectedHeading.length }})
                         </span>
                     </div>
                     <div>
